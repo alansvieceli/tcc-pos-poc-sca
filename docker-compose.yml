@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  gateway:
+    image: gateway
+    build:
+      context: .
+      dockerfile: SCA.Gateway/Dockerfile
+
+  authentication:
+    image: authentication
+    build:
+      context: .
+      dockerfile: SCA.Service.Auth/Dockerfile
