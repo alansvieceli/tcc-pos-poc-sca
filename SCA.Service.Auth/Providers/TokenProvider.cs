@@ -1,6 +1,6 @@
 ﻿using Microsoft.IdentityModel.Tokens;
-using SCA.Domain.Model;
-using SCA.Domain.Repository;
+using SCA.Shared.Model;
+using SCA.Shared.Repository;
 using SCA.Shared.Domain.Properties;
 using System;
 using System.Collections.Generic;

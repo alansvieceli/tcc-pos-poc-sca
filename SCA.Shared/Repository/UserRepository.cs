@@ -1,10 +1,10 @@
-﻿using SCA.Domain.Model;
-using SCA.Domain.Model.Enums;
+﻿using SCA.Shared.Model;
+using SCA.Shared.Model.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SCA.Domain.Repository
+namespace SCA.Shared.Repository
 {
     public class  UserRepository
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SCA.Domain.Model.Enums
+namespace SCA.Shared.Model.Enums
 {
     public static class Roles
     {
