@@ -7,13 +7,13 @@ using System.Net;
 namespace SCA.Service.Auth.Controllers
 {
     [ApiController]
-    [Route("api/v1/[controller]")]
-    public class AuthController : Controller
+    [Route("api/[controller]")]
+    public class TokenController : Controller
     {
 
         private readonly AuthService _authService;
 
-        public AuthController(AuthService authService)
+        public TokenController(AuthService authService)
         {
             _authService = authService;
         }
@@ -25,10 +25,10 @@ namespace SCA.Service.Auth.Controllers
         }
 
         [HttpPost]
-        [Route("login")]
-        public IActionResult Login([Bind("user,password")] LoginDto user)
+        [Route("authenticate")]
+        public IActionResult Generate([Bind("user,password")] LoginDto user)
         {
-            return Ok(_authService.Login(user));
+            return Ok(_authService.Authenticate(user));
         }
     }
 }

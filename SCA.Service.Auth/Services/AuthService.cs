@@ -13,7 +13,7 @@ namespace SCA.Service.Auth.Services
     public class AuthService
     {
 
-        public ResultApi Login(LoginDto user)
+        public ResultApi Authenticate(LoginDto user)
         {
             if (user == null)
             {
@@ -21,7 +21,7 @@ namespace SCA.Service.Auth.Services
             }
 
             TokenProvider _tokenProvider = new TokenProvider();
-            var _token = _tokenProvider.LoginUser(user.User.Trim(), user.Password.Trim());
+            var _token = _tokenProvider.AuthenticateUser(user.User.Trim(), user.Password.Trim());
 
             if (_token == null)
             {

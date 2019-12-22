@@ -15,7 +15,7 @@ namespace SCA.Service.Auth.Providers
     public class TokenProvider
     {
 
-        public JwtSecurityToken LoginUser(string UserID, string Password)
+        public JwtSecurityToken AuthenticateUser(string UserID, string Password)
         {
 
             List<User> UserList = UserRepository.GetUsers().ToList();
