@@ -1,6 +1,6 @@
-﻿{
+{
   "$schema": "http://json.schemastore.org/launchsettings.json",
-  "iisSettings": {
+    "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true
   },
@@ -8,15 +8,15 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/token",
+      "launchUrl": "api/test",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "SCA.Service.Auth": {
+    "SCA.Service.Inputs": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/token",
+      "launchUrl": "api/test",
       "applicationUrl": "http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
@@ -25,9 +25,9 @@
     "Docker": {
       "commandName": "Docker",
       "launchBrowser": true,
-      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/api/token",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/api/test",
       "environmentVariables": {
-        "ASPNETCORE_URLS": "http://+:80"
+        "ASPNETCORE_URLS": "http://+:80",
       },
       "httpPort": 63345
     }

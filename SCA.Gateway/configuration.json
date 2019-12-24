@@ -10,7 +10,7 @@
         }
       ],
       "UpstreamPathTemplate": "/auth/",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete", "Options" ]
+      "UpstreamHttpMethod": [ "Get", "Post", "Options" ]
     },
     {
       "DownstreamPathTemplate": "/{everything}",
@@ -22,6 +22,31 @@
         }
       ],
       "UpstreamPathTemplate": "/auth/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Options" ]
+    },
+	
+    {
+      "DownstreamPathTemplate": "/",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "input",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/input/",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete", "Options" ]
+    },
+    {
+      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "input",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/input/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete", "Options" ]
     }
   ],

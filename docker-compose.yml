@@ -12,3 +12,9 @@ services:
     build:
       context: .
       dockerfile: SCA.Service.Auth/Dockerfile
+      
+  input:
+    image: input
+    build:
+      context: .
+      dockerfile: SCA.Service.Inputs/Dockerfile
