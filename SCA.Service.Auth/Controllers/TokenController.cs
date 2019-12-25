@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using SCA.Service.Auth.Dto;
+using SCA.Shared.Dto;
 using SCA.Service.Auth.Services;
 using System.Net;
 

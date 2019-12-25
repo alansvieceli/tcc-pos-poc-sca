@@ -1,5 +1,5 @@
-﻿using SCA.Shared.Model;
-using SCA.Shared.Model.Enums;
+﻿using SCA.Shared.Entities;
+using SCA.Shared.Entities.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using SCA.Shared.Model;
+using SCA.Shared.Entities;
+using SCA.Shared.Results;
 using System;
 using System.Collections.Generic;
 using System.Net;

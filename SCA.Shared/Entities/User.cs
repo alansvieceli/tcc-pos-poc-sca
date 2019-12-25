@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SCA.Shared.Model
+namespace SCA.Shared.Entities
 {
     public class User
     {

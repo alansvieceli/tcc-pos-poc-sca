@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using SCA.Shared.CustomAttributes;
-using SCA.Shared.Model;
-using SCA.Shared.Model.Enums;
+using SCA.Shared.Entities;
+using SCA.Shared.Entities.Enums;
 using SCA.Shared.Repository;
 
 namespace SCA.Service.Inputs.Controllers

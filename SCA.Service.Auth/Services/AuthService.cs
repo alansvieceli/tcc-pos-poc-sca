@@ -1,12 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SCA.Service.Auth.Dto;
-using SCA.Service.Auth.Models;
+using SCA.Shared.Dto;
 using SCA.Service.Auth.Providers;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Threading.Tasks;
+using SCA.Shared.Results;
 
 namespace SCA.Service.Auth.Services
 {

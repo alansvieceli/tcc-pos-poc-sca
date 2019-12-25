@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using System.Net;
 using System.Text;
 
-namespace SCA.Shared.Model
+namespace SCA.Shared.Results
 {
     public abstract class ResultBase
     {
 
-        public bool status { get;  }
+        public bool status { get; set; }
 
         public ResultBase(bool status)
         {

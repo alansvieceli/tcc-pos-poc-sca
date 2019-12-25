@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SCA.Gateway", "SCA.Gateway\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SCA.Shared", "SCA.Shared\SCA.Shared.csproj", "{7B6CC66D-0E34-4A36-A72D-069373400AA1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCA.Service.Inputs", "SCA.Service.Inputs\SCA.Service.Inputs.csproj", "{83EBE4A9-8AF8-41A2-AAB5-ADCAB04F9ACB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SCA.Service.Inputs", "SCA.Service.Inputs\SCA.Service.Inputs.csproj", "{83EBE4A9-8AF8-41A2-AAB5-ADCAB04F9ACB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCA.Web", "SCA.Web\SCA.Web.csproj", "{83EE4FD3-DE0C-4EC8-A213-01A98E750980}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{83EBE4A9-8AF8-41A2-AAB5-ADCAB04F9ACB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83EBE4A9-8AF8-41A2-AAB5-ADCAB04F9ACB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83EBE4A9-8AF8-41A2-AAB5-ADCAB04F9ACB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83EE4FD3-DE0C-4EC8-A213-01A98E750980}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83EE4FD3-DE0C-4EC8-A213-01A98E750980}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83EE4FD3-DE0C-4EC8-A213-01A98E750980}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83EE4FD3-DE0C-4EC8-A213-01A98E750980}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
