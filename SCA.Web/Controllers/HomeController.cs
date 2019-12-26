@@ -67,7 +67,7 @@ namespace SCA.Web.Controllers
 
 
             string userToken = null;
-            if (result.StatusCode == HttpStatusCode.OK)
+            if (result.IsSuccessStatusCode)
             {
                 if (result.Content != null)
                 {
