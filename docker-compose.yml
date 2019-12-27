@@ -1,20 +1,47 @@
 version: '3.4'
 
 services:
-  gateway:
-    image: gateway
-    build:
-      context: .
-      dockerfile: SCA.Gateway/Dockerfile
+
+  db:
+    container_name: mysql-db-01
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+      - 33060:33060
+    env_file:
+      - var.env
+    volumes:
+      # Volume dos dados 
+      - ./dados:/var/lib/mysql
+      
+  admin_db:
+    container_name: mysql-admin-01
+    image: nazarpc/phpmyadmin
+    depends_on:
+      - db
+    links:
+      - db:mysql
+    ports:
+      - 8082:80
 
   authentication:
     image: authentication
     build:
       context: .
       dockerfile: SCA.Service.Auth/Dockerfile
+    depends_on:
+      - admin_db
       
-  input:
-    image: input
+  gateway:
+    image: gateway
     build:
       context: .
-      dockerfile: SCA.Service.Inputs/Dockerfile
+      dockerfile: SCA.Gateway/Dockerfile
+    depends_on:
+      - authentication
+      
+  #input:
+  #  image: input
+  #  build:
+  #     context: .
+  #    dockerfile: SCA.Service.Inputs/Dockerfile

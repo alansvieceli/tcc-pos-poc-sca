@@ -8,11 +8,14 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using SCA.Service.Inputs.Data;
+using SCA.Service.Inputs.Services;
 using SCA.Shared.Domain.Properties;
 
 namespace SCA.Service.Inputs
@@ -30,6 +33,10 @@ namespace SCA.Service.Inputs
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddDbContext<InputsContext>(options =>
+                options.UseMySql(Configuration.GetConnectionString("InputsContext"), builder =>
+                    builder.MigrationsAssembly("SCA.Service.Inputs")));
 
             //Provide a secret key to Encrypt and Decrypt the Token
             var SecretKey = Encoding.ASCII.GetBytes(Token.Key);
@@ -58,14 +65,20 @@ namespace SCA.Service.Inputs
                     ClockSkew = TimeSpan.Zero
                 };
             });
+
+            services.AddScoped<SeedingService>();
+            services.AddScoped<InsumoService>();
+            services.AddScoped<MarcaService>();
+            services.AddScoped<TipoService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, SeedingService seedingService)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                seedingService.Seed();
             }
 
             app.UseRouting();

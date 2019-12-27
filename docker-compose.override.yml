@@ -13,8 +13,8 @@ services:
     ports:
       - "6001:80"
       
-  input:
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-    ports:
-      - "6002:80"
+  #input:
+  #  environment:
+  #    - ASPNETCORE_ENVIRONMENT=Development
+  #  ports:
+  #    - "6002:80"
