@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SCA.Service.Inputs.Data;
-using SCA.Service.Inputs.Entities;
+using SCA.Shared.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,13 +17,13 @@ namespace SCA.Service.Inputs.Services
         {
             _context = context;
         }
-        public async Task<IEnumerable<Marca>> FindAll()
+
+        public async Task<IEnumerable<Marca>> FindAllAsync()
         {
             return await _context.Marca.OrderBy(t => t.Descricao).ToListAsync();
         }
 
-
-        public async Task<Marca> FindById(int? id)
+        public async Task<Marca> FindByIdAsync(int? id)
         {
             return (id == null) ? null : await _context.Marca.FirstOrDefaultAsync(m => m.Id == id);
         }

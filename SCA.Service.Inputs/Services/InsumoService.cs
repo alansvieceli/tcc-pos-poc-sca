@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SCA.Service.Inputs.Data;
-using SCA.Service.Inputs.Entities;
+using SCA.Shared.Entities;
 using SCA.Shared.Exceptions;
 using System;
 using System.Collections.Generic;
@@ -18,15 +18,15 @@ namespace SCA.Service.Inputs.Services
             _context = context;
         }
 
-        public async Task<IEnumerable<Insumo>> FindAll()
+        public async Task<IEnumerable<Insumo>> FindAllAsync()
         {
-            return await _context.Insumo.OrderBy(t => t.Descricao).ToListAsync();
+            return await _context.Insumo.Include(i => i.Marca).Include(i => i.Tipo).OrderBy(t => t.Descricao).ToListAsync();
         }
 
 
-        public async Task<Insumo> FindById(int? id)
+        public async Task<Insumo> FindByIdAsync(int? id)
         {
-            return (id == null) ? null : await _context.Insumo.FirstOrDefaultAsync(m => m.Id == id);
+            return (id == null) ? null : await _context.Insumo.Include(i => i.Marca).Include(i => i.Tipo).FirstOrDefaultAsync(m => m.Id == id);
         }
         public async Task InsertAsync(Insumo department)
         {

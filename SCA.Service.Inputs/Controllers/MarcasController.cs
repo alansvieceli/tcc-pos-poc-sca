@@ -8,29 +8,29 @@ namespace SCA.Service.Inputs.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class InsumosController : Controller
+    public class MarcasController : Controller
     {
-        private readonly InsumoService _insumoService;
+        private readonly MarcaService _marcaService;
 
-        public InsumosController(InsumoService service)
+        public MarcasController(MarcaService service)
         {
-            _insumoService = service;
+            _marcaService = service;
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Insumo>> Index()
+        public async Task<IEnumerable<Marca>> Index()
         {
-            return await _insumoService.FindAllAsync();
+            return await _marcaService.FindAllAsync();
         }
 
         [HttpGet]
         [Route("detail/{id}")]
-        public async Task<Insumo> Details(int? id)
+        public async Task<Marca> Details(int? id)
         {
-            var insumo = await _insumoService.FindByIdAsync(id);
+            var insumo = await _marcaService.FindByIdAsync(id);
             if (insumo == null)
             {
-                insumo = new Insumo();
+                insumo = new Marca();
             }
                 return insumo;
         }

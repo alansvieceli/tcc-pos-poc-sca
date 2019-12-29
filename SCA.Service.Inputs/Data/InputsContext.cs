@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SCA.Service.Inputs.Entities;
+using SCA.Shared.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
