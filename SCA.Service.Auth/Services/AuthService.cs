@@ -9,11 +9,11 @@ namespace SCA.Service.Auth.Services
     public class AuthService
     {
 
-        public ResultApi Authenticate(LoginDto user)
+        public ResultToken Authenticate(LoginDto user)
         {
             if (user == null)
             {
-                return new ResultApi(false, "Usuário ou senha inválidos");
+                return new ResultToken(false, "Usuário ou senha inválidos");
             }
 
             TokenProvider _tokenProvider = new TokenProvider();
@@ -21,11 +21,11 @@ namespace SCA.Service.Auth.Services
 
             if (_token == null)
             {
-                return new ResultApi(false, "Login inválido / Token não pode ser gerado");
+                return new ResultToken(false, "Login inválido / Token não pode ser gerado");
             }
 
             string userToken = new JwtSecurityTokenHandler().WriteToken(_token);                
-            return new ResultApi(true, "Token gerado com sucesso", userToken, _token.ValidTo);
+            return new ResultToken(true, "Token gerado com sucesso", userToken, _token.ValidTo);
         }
     }
 }

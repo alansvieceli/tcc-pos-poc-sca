@@ -65,15 +65,14 @@ namespace SCA.Web.Controllers
             HttpClient client = new HttpClient();
             var result = client.PostAsync("http://localhost:7000/auth/api/token/authenticate", content).Result;
 
-
             string userToken = null;
             if (result.IsSuccessStatusCode)
             {
                 if (result.Content != null)
                 {
                     var responseContent = await result.Content.ReadAsStringAsync();
-                    ResultApi resultApi = JsonConvert.DeserializeObject<ResultApi>(responseContent);
-                    userToken = resultApi.Token;
+                    ResultToken resultToken = JsonConvert.DeserializeObject<ResultToken>(responseContent);
+                    userToken = resultToken.Token;
                 }
             }
 

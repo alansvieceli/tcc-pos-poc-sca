@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using SCA.Shared.Domain.Properties;
+using SCA.Shared.Entities;
 using SCA.Web.Services;
 
 namespace SCA.Web
@@ -62,7 +63,7 @@ namespace SCA.Web
                 };
             });
 
-            services.AddScoped<InsumosService>();
+            services.AddScoped(typeof(IGenericService<>), typeof(GenericService<>));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

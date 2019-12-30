@@ -43,12 +43,12 @@ namespace SCA.Shared.CustomAttributes
                 if (!flagClaim)
                 {
                     context.HttpContext.Response.StatusCode = (int) HttpStatusCode.Unauthorized;
-                    context.Result = new JsonResult(new ResultError("Unauthorized"));
+                    context.Result = new JsonResult(new ResultApi(false, "Unauthorized"));
                 }
             } else
             {
                 context.HttpContext.Response.StatusCode = (int) HttpStatusCode.Forbidden;
-                context.Result = new JsonResult(new ResultError("Forbidden Access"));
+                context.Result = new JsonResult(new ResultApi(false, "Forbidden Access"));
             }
             return;
         }

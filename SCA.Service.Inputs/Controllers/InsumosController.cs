@@ -3,6 +3,8 @@ using SCA.Shared.Entities;
 using SCA.Service.Inputs.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using SCA.Shared.Results;
+using System;
 
 namespace SCA.Service.Inputs.Controllers
 {
@@ -24,7 +26,7 @@ namespace SCA.Service.Inputs.Controllers
         }
 
         [HttpGet]
-        [Route("detail/{id}")]
+        [Route("{id}")]
         public async Task<Insumo> Details(int? id)
         {
             var insumo = await _insumoService.FindByIdAsync(id);
@@ -32,7 +34,50 @@ namespace SCA.Service.Inputs.Controllers
             {
                 insumo = new Insumo();
             }
-                return insumo;
+            return insumo;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(Insumo insumo)
+        {
+            if (ModelState.IsValid)
+            {                
+                try
+                {
+                    await _insumoService.InsertAsync(insumo);
+                    return Ok(new ResultApi(true));
+                }
+                catch (ApplicationException e)
+                {
+                    return Ok(new ResultApi(false, e.Message));
+                }
+            }
+
+            return Ok(new ResultApi(false, "Não foi possivel inserir"));
+        }
+
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<IActionResult> Edit(int? id, Insumo insumo)
+        {
+            if (id != insumo.Id)
+            {
+                return Ok(new ResultApi(false, "Id não encontrado"));
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    await _insumoService.UpdateAsync(insumo);
+                }
+                catch (ApplicationException e)
+                {
+                    return Ok(new ResultApi(false, e.Message));
+                }
+            }
+
+            return Ok(new ResultApi(true));
         }
     }
 }

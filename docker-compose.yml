@@ -32,6 +32,14 @@ services:
     depends_on:
       - admin_db
       
+  input:
+    image: input
+    build:
+      context: .
+      dockerfile: SCA.Service.Inputs/Dockerfile
+    depends_on:
+      - admin_db
+      
   gateway:
     image: gateway
     build:
@@ -39,9 +47,5 @@ services:
       dockerfile: SCA.Gateway/Dockerfile
     depends_on:
       - authentication
+      - input
       
-  #input:
-  #  image: input
-  #  build:
-  #     context: .
-  #    dockerfile: SCA.Service.Inputs/Dockerfile

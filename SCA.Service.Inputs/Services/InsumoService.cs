@@ -28,19 +28,19 @@ namespace SCA.Service.Inputs.Services
         {
             return (id == null) ? null : await _context.Insumo.Include(i => i.Marca).Include(i => i.Tipo).FirstOrDefaultAsync(m => m.Id == id);
         }
-        public async Task InsertAsync(Insumo department)
+        public async Task InsertAsync(Insumo insumo)
         {
-            _context.Add(department);
+            _context.Add(insumo);
             await _context.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(int? id)
         {
-            var department = await _context.Insumo.FindAsync(id);
+            var insumo = await _context.Insumo.FindAsync(id);
 
             try
             {
-                _context.Insumo.Remove(department);
+                _context.Insumo.Remove(insumo);
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException e)
@@ -49,10 +49,10 @@ namespace SCA.Service.Inputs.Services
             }
         }
 
-        public async Task UpdateAsync(Insumo department)
+        public async Task UpdateAsync(Insumo insumo)
         {
 
-            var hasAny = await _context.Insumo.AnyAsync(s => s.Id == department.Id);
+            var hasAny = await _context.Insumo.AnyAsync(s => s.Id == insumo.Id);
             if (!hasAny)
             {
                 throw new NotFoundException("Id not found");
@@ -60,7 +60,7 @@ namespace SCA.Service.Inputs.Services
 
             try
             {
-                _context.Update(department);
+                _context.Update(insumo);
                 await _context.SaveChangesAsync();
 
             }

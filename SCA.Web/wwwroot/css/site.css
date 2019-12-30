@@ -69,3 +69,20 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+.flag {
+    height: 15px;
+    width: 15px;
+}
+
+.flag_red {
+    background-color: red;
+}
+
+.flag_yellow {
+    background-color: yellow;
+}
+
+.flag_green {
+    background-color: green;
+}

@@ -24,7 +24,7 @@ namespace SCA.Shared.CustomAttributes
             if (!IsAuthenticated)
             {
                 context.HttpContext.Response.StatusCode = (int) HttpStatusCode.Forbidden;
-                context.Result = new JsonResult(new ResultError("Forbidden Access"));
+                context.Result = new JsonResult(new ResultApi(false, "Forbidden Access"));
 
             }
         }

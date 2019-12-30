@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SCA.Shared.Dto;
 using SCA.Service.Auth.Services;
-using System.Net;
 
 namespace SCA.Service.Auth.Controllers
 {
@@ -19,7 +17,7 @@ namespace SCA.Service.Auth.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Index()
         {
             return Content("*** SCA.Service.Auth ***");
         }
