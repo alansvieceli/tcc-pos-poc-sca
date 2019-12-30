@@ -1,0 +1,59 @@
+﻿@model SCA.Shared.Entities.Insumo
+
+@{
+    ViewData["Title"] = "Insumo - Excluir";
+}
+
+<h1>View</h1>
+
+<h3>Tem certeza de que deseja excluir?</h3>
+<h4>O Status será modificado para "Inativo"</h4>
+<div>
+    <h4>Insumo</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MarcaId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MarcaId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TipoId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TipoId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Descricao)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DataCadastro)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DataCadastro)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="submit" value="Excluir" class="btn btn-danger" />
+    </form>
+    <div>
+        <a asp-action="Index">Voltar para Lista</a>
+    </div>
+</div>

@@ -16,5 +16,7 @@ namespace SCA.Web.Services
         Task<bool> InsertAsync(T obj);        
 
         Task<bool> UpdateAsync(int? id, T obj);
+
+        Task<bool> DeleteAsync(int? id);
     }
 }

@@ -54,13 +54,13 @@ namespace SCA.Web.Services
             string url = String.Concat(this.Url);
             var jsonContent = JsonConvert.SerializeObject(obj);
             var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-            var result = _clientHttp.PostAsync(url, content).Result;
+            HttpResponseMessage response = await _clientHttp.PostAsync(url, content);
 
-            if (result.IsSuccessStatusCode)
+            if (response.IsSuccessStatusCode)
             {
-                if (result.Content != null)
+                if (response.Content != null)
                 {
-                    var responseContent = await result.Content.ReadAsStringAsync();
+                    var responseContent = await response.Content.ReadAsStringAsync();
                     ResultApi resultApi = JsonConvert.DeserializeObject<ResultApi>(responseContent);
                     return resultApi.status;
                 }
@@ -74,13 +74,35 @@ namespace SCA.Web.Services
             string url = String.Concat(this.Url);
             var jsonContent = JsonConvert.SerializeObject(obj);
             var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-            var result = _clientHttp.PutAsync(string.Concat(this.Url, $"/{id}"), content).Result;
+            HttpResponseMessage response = await _clientHttp.PutAsync(string.Concat(this.Url, $"/{id}"), content);
 
-            if (result.IsSuccessStatusCode)
+            if (response.IsSuccessStatusCode)
             {
-                if (result.Content != null)
+                if (response.Content != null)
                 {
-                    var responseContent = await result.Content.ReadAsStringAsync();
+                    var responseContent = await response.Content.ReadAsStringAsync();
+                    ResultApi resultApi = JsonConvert.DeserializeObject<ResultApi>(responseContent);
+                    return resultApi.status;
+                }
+            }
+
+            return false;
+        }
+
+        public async Task<bool> DeleteAsync(int? id)
+        {
+            if (id == null)
+            {
+                return false;
+            }
+
+            HttpResponseMessage response =  await _clientHttp.DeleteAsync(string.Concat(this.Url, $"/{id}"));
+            
+            if (response.IsSuccessStatusCode)
+            {
+                if (response.Content != null)
+                {
+                    var responseContent = await response.Content.ReadAsStringAsync();
                     ResultApi resultApi = JsonConvert.DeserializeObject<ResultApi>(responseContent);
                     return resultApi.status;
                 }

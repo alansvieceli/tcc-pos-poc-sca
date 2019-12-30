@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SCA.Shared.Entities;
 using SCA.Shared.Entities.Enums;
+using SCA.Shared.Exceptions;
 using SCA.Web.Models.ViewModels;
 using SCA.Web.Services;
 
@@ -109,6 +110,33 @@ namespace SCA.Web.Controllers
 
             return RedirectToAction(nameof(Index));
 
+        }
+
+        public async Task<IActionResult> Delete(int? id)
+        {
+
+            var insumo = await _insumosService.FindByIdAsync(id.Value);
+            if (insumo == null)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Id not found" });
+            }
+
+            return View(insumo);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int? id)
+        {
+            try
+            {
+                await _insumosService.DeleteAsync(id.Value);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (IntegrityException e)
+            {
+                return RedirectToAction(nameof(Error), new { message = e.Message });
+            }
         }
 
         public IActionResult Error(string message)
