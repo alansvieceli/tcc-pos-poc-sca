@@ -8,12 +8,11 @@ namespace SCA.Service.Auth.Controllers
     [Route("api/[controller]")]
     public class TokenController : Controller
     {
-
         private readonly AuthService _authService;
 
         public TokenController(AuthService authService)
         {
-            _authService = authService;
+            this._authService = authService;
         }
 
         [HttpGet]
@@ -26,7 +25,7 @@ namespace SCA.Service.Auth.Controllers
         [Route("authenticate")]
         public IActionResult Generate([Bind("user,password")] LoginDto user)
         {
-            return Ok(_authService.Authenticate(user));
+            return Ok(this._authService.Authenticate(user));
         }
     }
 }

@@ -19,15 +19,15 @@
                         <table>
                             <tr>
                                 <td style="width:30%;">User ID</td>
-                                <td style="width:50%;"><label>@Model.USERID</label></td>
+                                <td style="width:50%;"><label>@Model.UserId</label></td>
                             </tr>
                             <tr>
-                                <td>Email ID</td>
-                                <td><label>@Model.EMAILID</label></td>
+                                <td>Email</td>
+                                <td><label>@Model.Email</label></td>
                             </tr>
                             <tr>
                                 <td>Access Level</td>
-                                <td><b><label>@Model.ACCESS_LEVEL</label><b></td>
+                                <td><b><label>@Model.AcessLevel.ToString()</label><b></td>
                             </tr>
                         </table>
                     </div>
@@ -47,14 +47,14 @@
                                 <label>User ID</label><br />
                             </div>
                             <div>
-                                @Html.TextBoxFor(m => m.USERID, new { @class = "form-control txtbox" })
+                                @Html.TextBoxFor(m => m.UserId, new { @class = "form-control txtbox" })
                             </div>
                             <div style="padding-top:20px;"></div>
                             <div>
                                 <label>Password</label><br />
                             </div>
                             <div>
-                                @Html.PasswordFor(m => m.PASSWORD, new { @class = "form-control txtbox" })
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control txtbox" })
                             </div>
                         </div>
                         <div style="padding-left:35%;width:40%;">
@@ -74,10 +74,9 @@
                     </div>
                     <div style="padding-top:10px;">
                         <ui style="list-style: none;">
-                            <li>jsmith@email.com  -  Director, Read Only - true</li>
-                            <li>srob@email.com  -  Supervisor, Read Only - false</li>
-                            <li>dwill@email.com  -  Analyst, Read Only - false</li>
-                            <li>JBlack@email.com  -  Analyst, Read Only - true</li>
+                            <li>admin@company.com  - ADMIN - admin</li>
+                            <li>monitor@company.com  - MONITOR - monitor</li>
+                            <li>user@company.com  - USER_COMMON - user</li>
                         </ui>
                     </div>
                 </div>

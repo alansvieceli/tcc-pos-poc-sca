@@ -1,6 +1,5 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using SCA.Shared.Entities;
-using SCA.Shared.Repositories;
 using SCA.Shared.Domain.Properties;
 using System;
 using System.Collections.Generic;
@@ -9,22 +8,29 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using SCA.Service.Auth.Services;
 
 namespace SCA.Service.Auth.Providers
 {
     public class TokenProvider
     {
+        private readonly UserService _userService;
+
+        public TokenProvider(UserService userService)
+        {
+            this._userService = userService;
+        }
 
         public JwtSecurityToken AuthenticateUser(string UserID, string Password)
         {
 
-            List<User> UserList = UserRepository.GetUsers().ToList();
-            var user = UserList.SingleOrDefault(x => x.USERID == UserID);
+            List<User> UserList = this._userService.FindAll().ToList();
+            var user = UserList.SingleOrDefault(x => x.UserId == UserID);
 
             if (user == null)
                 return null;
 
-            if (Password == user.PASSWORD)
+            if (Password == user.Password)
             {
                 var key = Encoding.ASCII.GetBytes(Token.Key);
                 
@@ -49,13 +55,13 @@ namespace SCA.Service.Auth.Providers
         {
             List<Claim> claims = new List<Claim>();
             Claim _claim;
-            _claim = new Claim(ClaimTypes.Name, user.FIRST_NAME + " " + user.LAST_NAME);
+            _claim = new Claim(ClaimTypes.Name, user.FirtName + " " + user.LastName);
             claims.Add(_claim);
-            _claim = new Claim("USERID", user.USERID);
+            _claim = new Claim("USERID", user.UserId);
             claims.Add(_claim);
-            _claim = new Claim("EMAILID", user.EMAILID);
+            _claim = new Claim("EMAILID", user.Email);
             claims.Add(_claim);
-            _claim = new Claim(user.ACCESS_LEVEL, user.ACCESS_LEVEL);
+            _claim = new Claim(user.AcessLevel.ToString(), user.AcessLevel.ToString());
             claims.Add(_claim);
             return claims.AsEnumerable<Claim>();
         }

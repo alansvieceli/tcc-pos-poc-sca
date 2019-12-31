@@ -7,7 +7,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SCA.Web.Services
+namespace SCA.Shared.Services
 {
     public class GenericService<T> : IGenericService<T>
     {

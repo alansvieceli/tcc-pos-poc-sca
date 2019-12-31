@@ -8,6 +8,12 @@ namespace SCA.Service.Auth.Services
 {
     public class AuthService
     {
+        private readonly TokenProvider _tokenService;
+
+        public AuthService(TokenProvider tokenService)
+        {
+            this._tokenService = tokenService;
+        }
 
         public ResultToken Authenticate(LoginDto user)
         {
@@ -16,8 +22,7 @@ namespace SCA.Service.Auth.Services
                 return new ResultToken(false, "Usuário ou senha inválidos");
             }
 
-            TokenProvider _tokenProvider = new TokenProvider();
-            var _token = _tokenProvider.AuthenticateUser(user.User.Trim(), user.Password.Trim());
+            var _token = this._tokenService.AuthenticateUser(user.User.Trim(), user.Password.Trim());
 
             if (_token == null)
             {

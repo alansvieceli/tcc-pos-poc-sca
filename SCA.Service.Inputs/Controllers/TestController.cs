@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using SCA.Shared.CustomAttributes;
 using SCA.Shared.Entities;
 using SCA.Shared.Entities.Enums;
-using SCA.Shared.Repositories;
 
 namespace SCA.Service.Inputs.Controllers
 {
@@ -13,11 +12,11 @@ namespace SCA.Service.Inputs.Controllers
     public class TestController : ControllerBase
     {
 
-        [Authorize(Roles.DIRECTOR)]
+        [Authorize(Role.ADMIN)]
         [HttpGet]
         public IEnumerable<User> Get()
         {
-            return UserRepository.GetUsers();
+            return new List<User>();
         }
     }
 }

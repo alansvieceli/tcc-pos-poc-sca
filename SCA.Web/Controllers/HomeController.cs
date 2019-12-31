@@ -11,11 +11,29 @@ using SCA.Shared.Dto;
 using System.Net;
 using Microsoft.AspNetCore.Http;
 using SCA.Shared.Results;
+using Microsoft.Extensions.Configuration;
 
 namespace SCA.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IConfiguration _configuration;
+        private string _host;
+        private int _port;
+
+        public HomeController(IConfiguration config)
+        {
+            this._configuration = config;
+
+            Prepare();
+        }
+
+        private void Prepare()
+        {
+            this._host = this._configuration.GetSection("ConfigApp").GetSection("host").Value;
+            this._port = ConfigurationBinder.GetValue<int>(this._configuration.GetSection("ConfigApp"), "port", 80);
+        }
+
         public IActionResult Index()
         {
             User objLoggedInUser = new User();
@@ -33,19 +51,19 @@ namespace SCA.Web.Controllers
                         switch (cType)
                         {
                             case "USERID":
-                                objLoggedInUser.USERID = cValue;
+                                objLoggedInUser.UserId = cValue;
                                 break;
                             case "EMAILID":
-                                objLoggedInUser.EMAILID = cValue;
+                                objLoggedInUser.Email = cValue;
                                 break;
-                            case "DIRECTOR":
-                                objLoggedInUser.ACCESS_LEVEL = cValue;
+                            case "ADMIN":
+                                objLoggedInUser.AcessLevel = Role.ADMIN;
                                 break;
-                            case "SUPERVISOR":
-                                objLoggedInUser.ACCESS_LEVEL = cValue;
+                            case "MONITOR":
+                                objLoggedInUser.AcessLevel = Role.MONITOR;
                                 break;
-                            case "ANALYST":
-                                objLoggedInUser.ACCESS_LEVEL = cValue;
+                            case "USER_COMMON":
+                                objLoggedInUser.AcessLevel = Role.USER_COMMON;
                                 break;
                         }
                     }
@@ -63,7 +81,7 @@ namespace SCA.Web.Controllers
             var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
             HttpClient client = new HttpClient();
-            var result = client.PostAsync("http://localhost:7000/auth/api/token/authenticate", content).Result;
+            var result = client.PostAsync($"http://{this._host}:{this._port}/auth/api/token/authenticate", content).Result;
 
             string userToken = null;
             if (result.IsSuccessStatusCode)
@@ -91,18 +109,18 @@ namespace SCA.Web.Controllers
 
         private string GetRole()
         {
-            if (this.HavePermission(Roles.DIRECTOR))
-                return " - DIRECTOR";
-            if (this.HavePermission(Roles.SUPERVISOR))
-                return " - SUPERVISOR";
-            if (this.HavePermission(Roles.ANALYST))
-                return " - ANALYST";
+            if (this.HavePermission(Role.ADMIN))
+                return " - ADMIN";
+            if (this.HavePermission(Role.MONITOR))
+                return " - MONITOR";
+            if (this.HavePermission(Role.USER_COMMON))
+                return " - USER_COMMON";
             return "NOTHING";
         }
 
         private LoginDto ConverteUserToLoginDto(User user)
         {
-            return new LoginDto(user.USERID, user.PASSWORD);
+            return new LoginDto(user.UserId, user.Password);
         }
 
 

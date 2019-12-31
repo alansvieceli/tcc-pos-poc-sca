@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using SCA.Shared.Entities.Enums;
 
 namespace SCA.Shared.Entities
 {
     public class User
     {
-        public string USERID { get; set; }
-        public string PASSWORD { get; set; }
-        public string FIRST_NAME { get; set; }
-        public string LAST_NAME { get; set; }
-        public string EMAILID { get; set; }
-        public string ACCESS_LEVEL { get; set; }
+        public int Id { get; set; }
+        public string UserId { get; set; }
+        public string Password { get; set; }
+        public string FirtName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public Role AcessLevel { get; set; }
     }
 }

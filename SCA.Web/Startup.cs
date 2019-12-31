@@ -12,8 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using SCA.Shared.Domain.Properties;
-using SCA.Shared.Entities;
-using SCA.Web.Services;
+using SCA.Shared.Services;
 
 namespace SCA.Web
 {

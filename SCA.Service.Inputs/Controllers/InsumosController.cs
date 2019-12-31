@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using SCA.Shared.Results;
 using System;
+using SCA.Shared.Entities.Enums;
 
 namespace SCA.Service.Inputs.Controllers
 {
@@ -41,7 +42,7 @@ namespace SCA.Service.Inputs.Controllers
         public async Task<IActionResult> Create(Insumo insumo)
         {
             if (ModelState.IsValid)
-            {                
+            {
                 try
                 {
                     await _insumoService.InsertAsync(insumo);
@@ -75,6 +76,29 @@ namespace SCA.Service.Inputs.Controllers
                 {
                     return Ok(new ResultApi(false, e.Message));
                 }
+            }
+
+            return Ok(new ResultApi(true));
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<IActionResult> Delete(int? id)
+        {
+            var insumo = await _insumoService.FindByIdAsync(id);
+            if (insumo == null)
+            {
+                return Ok(new ResultApi(false, "Id não encontrado"));
+            }
+
+            insumo.Status = InsumosStatus.Inativo;
+            try
+            {
+                await _insumoService.UpdateAsync(insumo);
+            }
+            catch (ApplicationException e)
+            {
+                return Ok(new ResultApi(false, e.Message));
             }
 
             return Ok(new ResultApi(true));

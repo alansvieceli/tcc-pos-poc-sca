@@ -4,28 +4,40 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using SCA.Shared.Entities;
 using SCA.Shared.Entities.Enums;
 using SCA.Shared.Exceptions;
+using SCA.Shared.Services;
 using SCA.Web.Models.ViewModels;
-using SCA.Web.Services;
 
 namespace SCA.Web.Controllers
 {
     public class InsumosController : Controller
     {
+        private readonly IConfiguration _configuration;
         private readonly IGenericService<Insumo> _insumosService;
         private readonly IGenericService<Marca> _marcaService;
         private readonly IGenericService<Tipo> _tipoService;
 
-        public InsumosController(IGenericService<Insumo> insumosService, IGenericService<Marca> marcasService, IGenericService<Tipo> tiposService)
+        public InsumosController(IConfiguration config, IGenericService<Insumo> insumosService, IGenericService<Marca> marcasService, IGenericService<Tipo> tiposService)
         {
+            this._configuration = config;
             this._insumosService = insumosService;
             this._marcaService = marcasService;
             this._tipoService = tiposService;
-            _insumosService.SetUrl("http://localhost:7000/input/api/insumos");
-            _marcaService.SetUrl("http://localhost:7000/input/api/marcas");
-            _tipoService.SetUrl("http://localhost:7000/input/api/tipos");
+
+            Prepare();
+        }
+
+        private void Prepare()
+        {
+            string host = this._configuration.GetSection("ConfigApp").GetSection("host").Value;
+            int port = ConfigurationBinder.GetValue<int>(this._configuration.GetSection("ConfigApp"), "port", 80);
+
+            _insumosService.SetUrl($"http://{host}:{port}/input/api/insumos");
+            _marcaService.SetUrl($"http://{host}:{port}/input/api/marcas");
+            _tipoService.SetUrl($"http://{host}:{port}/input/api/tipos");
         }
 
         public async Task<IActionResult> Index()

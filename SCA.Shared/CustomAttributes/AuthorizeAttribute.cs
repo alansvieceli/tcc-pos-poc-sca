@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using SCA.Shared.Entities;
+using SCA.Shared.Entities.Enums;
 using SCA.Shared.Results;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace SCA.Shared.CustomAttributes
 {
     public class AuthorizeAttribute : TypeFilterAttribute
     {
-        public AuthorizeAttribute(params string[] claim) : base(typeof(AuthorizeFilter))
+        public AuthorizeAttribute(params Role[] claim) : base(typeof(AuthorizeFilter))
         {
             Arguments = new object[] { claim };
         }

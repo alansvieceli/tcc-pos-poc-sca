@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SCA.Web.Services
+namespace SCA.Shared.Services
 {
     public interface IGenericService<T>
     {
