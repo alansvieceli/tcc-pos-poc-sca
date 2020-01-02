@@ -9,6 +9,8 @@ namespace SCA.Shared.Services
     {
         void SetUrl(string url);
 
+        void SetToken(string token);
+
         Task<IEnumerable<T>> FindAllAsync();
 
         Task<T> FindByIdAsync(int? id);

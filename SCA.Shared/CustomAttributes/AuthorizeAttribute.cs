@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using SCA.Shared.CustomAttributes.Enums;
 using SCA.Shared.Entities;
 using SCA.Shared.Entities.Enums;
 using SCA.Shared.Results;
@@ -15,17 +16,24 @@ namespace SCA.Shared.CustomAttributes
     {
         public AuthorizeAttribute(params Role[] claim) : base(typeof(AuthorizeFilter))
         {
-            Arguments = new object[] { claim };
+            Arguments = new object[] { TipoRetornoAcesso.API, claim };
+        }
+
+        public AuthorizeAttribute(TipoRetornoAcesso tipoRetorno, params Role[] claim) : base(typeof(AuthorizeFilter))
+        {
+            Arguments = new object[] { tipoRetorno, claim };
         }
     }
 
     public class AuthorizeFilter : IAuthorizationFilter
     {
-        readonly string[] _claim;
+        private readonly Role[] _claim;
+        private readonly TipoRetornoAcesso _tipoRetorno;
 
-        public AuthorizeFilter(params string[] claim)
+        public AuthorizeFilter(TipoRetornoAcesso tipoRetorno, params Role[] claim)
         {
-            _claim = claim;
+            this._tipoRetorno = tipoRetorno;
+            this._claim = claim;
         }
 
         public void OnAuthorization(AuthorizationFilterContext context)
@@ -38,18 +46,30 @@ namespace SCA.Shared.CustomAttributes
                 bool flagClaim = false;
                 foreach (var item in _claim)
                 {
-                    if (context.HttpContext.User.HasClaim(item, item))
+                    if (context.HttpContext.User.HasClaim(item.ToString(), item.ToString()))
                         flagClaim = true;
                 }
                 if (!flagClaim)
                 {
-                    context.HttpContext.Response.StatusCode = (int) HttpStatusCode.Unauthorized;
-                    context.Result = new JsonResult(new ResultApi(false, "Unauthorized"));
+                    if (this._tipoRetorno.Equals(TipoRetornoAcesso.WEB))
+                    {
+                        context.Result = new RedirectResult("~/Home/Unauthorized");
+                    } else
+                    {
+                        context.HttpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                        context.Result = new JsonResult(new ResultApi(false, "Unauthorized"));
+                    }
                 }
             } else
             {
-                context.HttpContext.Response.StatusCode = (int) HttpStatusCode.Forbidden;
-                context.Result = new JsonResult(new ResultApi(false, "Forbidden Access"));
+                if (this._tipoRetorno.Equals(TipoRetornoAcesso.WEB))
+                {
+                    context.Result = new RedirectResult("~/Home/NoPermission");
+                } else
+                {
+                    context.HttpContext.Response.StatusCode = (int)HttpStatusCode.Forbidden;
+                    context.Result = new JsonResult(new ResultApi(false, "Forbidden Access"));
+                }
             }
             return;
         }

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,7 +13,8 @@ namespace SCA.Shared.Services
     public class GenericService<T> : IGenericService<T>
     {
         protected readonly HttpClient _clientHttp;
-        public string Url { get; set; }
+        public string _url { get; set; }
+        public string _token { get; set; }
 
         public GenericService()
         {
@@ -21,12 +23,22 @@ namespace SCA.Shared.Services
 
         public void SetUrl(string url)
         {
-            this.Url = url;
+            this._url = url;
+        }
+
+        public void SetToken(string token)
+        {   
+            if (this._token != token)
+            {
+                this._token = token;
+                this._clientHttp.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this._token);
+            }
         }
 
         public async Task<IEnumerable<T>> FindAllAsync()
         {
-            var response = await _clientHttp.GetAsync(this.Url);
+            
+            var response = await _clientHttp.GetAsync(this._url);
             response.EnsureSuccessStatusCode();
             string responseBody = await response.Content.ReadAsStringAsync();
             IEnumerable<T> lista = JsonConvert.DeserializeObject<IEnumerable<T>>(responseBody);
@@ -41,7 +53,7 @@ namespace SCA.Shared.Services
                 return default(T);
             }
 
-            var response = await _clientHttp.GetAsync(string.Concat(this.Url, $"/{id}"));
+            var response = await _clientHttp.GetAsync(string.Concat(this._url, $"/{id}"));
             response.EnsureSuccessStatusCode();
             string responseBody = await response.Content.ReadAsStringAsync();
             T obj = JsonConvert.DeserializeObject<T>(responseBody);
@@ -51,7 +63,7 @@ namespace SCA.Shared.Services
 
         public async Task<bool> InsertAsync(T obj)
         {
-            string url = String.Concat(this.Url);
+            string url = String.Concat(this._url);
             var jsonContent = JsonConvert.SerializeObject(obj);
             var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
             HttpResponseMessage response = await _clientHttp.PostAsync(url, content);
@@ -71,10 +83,10 @@ namespace SCA.Shared.Services
 
         public async Task<bool> UpdateAsync(int? id, T obj)
         {
-            string url = String.Concat(this.Url);
+            string url = String.Concat(this._url);
             var jsonContent = JsonConvert.SerializeObject(obj);
             var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await _clientHttp.PutAsync(string.Concat(this.Url, $"/{id}"), content);
+            HttpResponseMessage response = await _clientHttp.PutAsync(string.Concat(this._url, $"/{id}"), content);
 
             if (response.IsSuccessStatusCode)
             {
@@ -96,7 +108,7 @@ namespace SCA.Shared.Services
                 return false;
             }
 
-            HttpResponseMessage response =  await _clientHttp.DeleteAsync(string.Concat(this.Url, $"/{id}"));
+            HttpResponseMessage response =  await _clientHttp.DeleteAsync(string.Concat(this._url, $"/{id}"));
             
             if (response.IsSuccessStatusCode)
             {

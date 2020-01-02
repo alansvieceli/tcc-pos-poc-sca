@@ -3,17 +3,24 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using SCA.Shared.CustomController;
+using SCA.Shared.CustomAttributes;
+using SCA.Shared.CustomAttributes.Enums;
 using SCA.Shared.Entities;
 using SCA.Shared.Entities.Enums;
 using SCA.Shared.Exceptions;
 using SCA.Shared.Services;
+using SCA.Web.Controllers.Filters;
 using SCA.Web.Models.ViewModels;
 
 namespace SCA.Web.Controllers
 {
-    public class InsumosController : Controller
+    [Authorize(TipoRetornoAcesso.WEB, Role.ADMIN, Role.USER_COMMON)]
+    [PegarTokenActionFilter]
+    public class InsumosController : ScaController
     {
         private readonly IConfiguration _configuration;
         private readonly IGenericService<Insumo> _insumosService;
@@ -34,10 +41,16 @@ namespace SCA.Web.Controllers
         {
             string host = this._configuration.GetSection("ConfigApp").GetSection("host").Value;
             int port = ConfigurationBinder.GetValue<int>(this._configuration.GetSection("ConfigApp"), "port", 80);
-
             _insumosService.SetUrl($"http://{host}:{port}/input/api/insumos");
             _marcaService.SetUrl($"http://{host}:{port}/input/api/marcas");
             _tipoService.SetUrl($"http://{host}:{port}/input/api/tipos");
+        }
+
+        public override void SetToken(string token)
+        {
+            _insumosService.SetToken(token);
+            _marcaService.SetToken(token);
+            _tipoService.SetToken(token);
         }
 
         public async Task<IActionResult> Index()
@@ -51,7 +64,7 @@ namespace SCA.Web.Controllers
         {
             var marcas = await _marcaService.FindAllAsync();
             var tipos = await _tipoService.FindAllAsync();
-            var viewModel = new InsumosViewModel { Insumo = new Insumo { DataCadastro = DateTime.Today },  Marcas = marcas, Tipos = tipos };
+            var viewModel = new InsumosViewModel { Insumo = new Insumo { DataCadastro = DateTime.Today }, Marcas = marcas, Tipos = tipos };
             return View(viewModel);
         }
 
@@ -160,5 +173,6 @@ namespace SCA.Web.Controllers
 
             return View(viewModel);
         }
+
     }
 }

@@ -3,11 +3,15 @@ using SCA.Shared.Entities;
 using SCA.Service.Inputs.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using SCA.Shared.CustomAttributes.Enums;
+using SCA.Shared.Entities.Enums;
+using SCA.Shared.CustomAttributes;
 
 namespace SCA.Service.Inputs.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize(Role.ADMIN, Role.USER_COMMON)]
     public class MarcasController : Controller
     {
         private readonly MarcaService _marcaService;

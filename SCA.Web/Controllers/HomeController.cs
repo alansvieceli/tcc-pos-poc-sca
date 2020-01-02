@@ -107,6 +107,18 @@ namespace SCA.Web.Controllers
             return Redirect("~/Home/Index");
         }
 
+        public IActionResult NoPermission()
+        {
+            ViewBag.UserRole = GetRole();
+            return View("NoPermission");
+        }
+
+        public IActionResult Unauthorized()
+        {
+            ViewBag.UserRole = GetRole();
+            return View("Unauthorized");
+        }
+
         private string GetRole()
         {
             if (this.HavePermission(Role.ADMIN))
@@ -122,7 +134,5 @@ namespace SCA.Web.Controllers
         {
             return new LoginDto(user.UserId, user.Password);
         }
-
-
     }
 }
