@@ -6,7 +6,7 @@ using SCA.Service.Inputs.Data;
 
 namespace SCA.Service.Auth.Migrations
 {
-    [DbContext(typeof(UserContext))]
+    [DbContext(typeof(AuthContext))]
     partial class UserContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

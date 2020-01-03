@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using SCA.Service.Auth.Providers;
 using SCA.Service.Auth.Services;
 using SCA.Service.Inputs.Data;
+using SCA.Shared.Startup;
 
 namespace SCA.Service.Auth
 {
@@ -27,9 +28,7 @@ namespace SCA.Service.Auth
 
             services.AddControllers();
 
-            services.AddDbContext<UserContext>(options =>
-                options.UseMySql(Configuration.GetConnectionString("AuthContext"), builder =>
-                    builder.MigrationsAssembly("SCA.Service.Auth")));
+            ScaStartup.AddDbContext<AuthContext>(services, Configuration.GetConnectionString("AuthContext"), "SCA.Service.Auth");
 
             services.AddScoped<SeedingService>();
             services.AddScoped<AuthService>();

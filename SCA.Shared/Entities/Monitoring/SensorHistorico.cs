@@ -3,7 +3,7 @@ using System;
 
 namespace SCA.Shared.Entities.Monitoring
 {
-    public class HistSensor
+    public class SensorHistorico
     {
         public int Id { get; set; }
         public Sensor Sensor { get; set; }

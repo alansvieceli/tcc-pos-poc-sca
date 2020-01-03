@@ -7,7 +7,7 @@ using SCA.Service.Inputs.Data;
 
 namespace SCA.Service.Auth.Migrations
 {
-    [DbContext(typeof(UserContext))]
+    [DbContext(typeof(AuthContext))]
     [Migration("20191231014358_Usuario")]
     partial class Usuario
     {

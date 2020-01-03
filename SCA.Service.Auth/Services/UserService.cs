@@ -10,9 +10,9 @@ namespace SCA.Service.Auth.Services
 {
     public class UserService
     {
-        private readonly UserContext _context;
+        private readonly AuthContext _context;
 
-        public UserService(UserContext context)
+        public UserService(AuthContext context)
         {
             this._context = context;
         }

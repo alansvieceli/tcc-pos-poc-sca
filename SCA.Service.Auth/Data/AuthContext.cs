@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace SCA.Service.Inputs.Data
 {
-    public class UserContext : DbContext
+    public class AuthContext : DbContext
     {
-        public UserContext(DbContextOptions<UserContext> options) : base(options)
+        public AuthContext(DbContextOptions<AuthContext> options) : base(options)
         {
         }
 
