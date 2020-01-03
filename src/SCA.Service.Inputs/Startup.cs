@@ -3,10 +3,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using SCA.Service.Maintenance.Data;
-using SCA.Shared.Startup;
+using SCA.Service.Inputs.Data;
+using SCA.Service.Inputs.Services;
+using SCA.Shared.Extensions;
 
-namespace SCA.Maintenance
+namespace SCA.Service.Inputs
 {
     public class Startup
     {
@@ -22,22 +23,28 @@ namespace SCA.Maintenance
         {
             services.AddControllers();
 
-            ScaStartup.AddDbContext<MaintenanceContext>(services, Configuration.GetConnectionString("MaintenanceContext"), "SCA.Service.Maintenance");
+            services.AddContexto<InputsContext>(Configuration.GetConnectionString("InputsContext"), "SCA.Service.Inputs");
 
-            ScaStartup.AddAuthentication(services);
+            services.AddAutenticacao();
+
+            services.AddScoped<SeedingService>();
+            services.AddScoped<InsumoService>();
+            services.AddScoped<MarcaService>();
+            services.AddScoped<TipoService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, SeedingService seedingService)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                seedingService.Seed();
             }
 
-            app.UseHttpsRedirection();
-
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

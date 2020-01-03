@@ -1,16 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using SCA.Service.Auth.Providers;
-using SCA.Service.Auth.Services;
-using SCA.Service.Inputs.Data;
-using SCA.Shared.Startup;
+using SCA.Service.Monitoring.Data;
+using SCA.Shared.Extensions;
 
-namespace SCA.Service.Auth
+namespace SCA.Monitoring
 {
     public class Startup
     {
@@ -24,33 +20,22 @@ namespace SCA.Service.Auth
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors();
-
             services.AddControllers();
 
-            ScaStartup.AddDbContext<AuthContext>(services, Configuration.GetConnectionString("AuthContext"), "SCA.Service.Auth");
+            services.AddContexto<MonitoringContext>(Configuration.GetConnectionString("MonitoringContext"), "SCA.Service.Monitoring");
 
-            services.AddScoped<SeedingService>();
-            services.AddScoped<AuthService>();
-            services.AddScoped<UserService>();
-            services.AddScoped<TokenProvider>();
+            services.AddAutenticacao();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, SeedingService seedingService)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                seedingService.Seed();
             }
 
             app.UseRouting();
-
-            app.UseCors(x => x
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader());
 
             app.UseAuthorization();
 
