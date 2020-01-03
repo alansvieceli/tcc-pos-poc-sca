@@ -1,5 +1,5 @@
 ﻿using Microsoft.IdentityModel.Tokens;
-using SCA.Shared.Entities;
+using SCA.Shared.Entities.Auth;
 using SCA.Shared.Domain.Properties;
 using System;
 using System.Collections.Generic;

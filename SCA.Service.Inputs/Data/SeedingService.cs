@@ -1,9 +1,7 @@
-﻿using SCA.Shared.Entities;
+﻿using SCA.Shared.Entities.Inputs;
 using SCA.Shared.Entities.Enums;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace SCA.Service.Inputs.Data
 {

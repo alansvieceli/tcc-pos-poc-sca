@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SCA.Service.Inputs.Data;
-using SCA.Shared.Entities;
+using SCA.Shared.Entities.Inputs;
 using SCA.Shared.Exceptions;
 using System;
 using System.Collections.Generic;

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SCA.Shared.Entities;
+using SCA.Shared.Entities.Inputs;
 using SCA.Service.Inputs.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;

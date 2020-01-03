@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,7 +8,7 @@ using Microsoft.Extensions.Configuration;
 using SCA.Shared.CustomController;
 using SCA.Shared.CustomAttributes;
 using SCA.Shared.CustomAttributes.Enums;
-using SCA.Shared.Entities;
+using SCA.Shared.Entities.Inputs;
 using SCA.Shared.Entities.Enums;
 using SCA.Shared.Exceptions;
 using SCA.Shared.Services;

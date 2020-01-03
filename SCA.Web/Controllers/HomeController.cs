@@ -1,14 +1,13 @@
 ﻿using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using SCA.Shared.Entities;
+using SCA.Shared.Entities.Auth;
 using SCA.Shared.Entities.Enums;
 using SCA.Shared.CustomAttributes;
 using System.Net.Http;
 using System.Text;
 using Newtonsoft.Json;
 using SCA.Shared.Dto;
-using System.Net;
 using Microsoft.AspNetCore.Http;
 using SCA.Shared.Results;
 using Microsoft.Extensions.Configuration;

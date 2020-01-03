@@ -1,8 +1,5 @@
-﻿using SCA.Shared.Entities;
-using System;
+﻿using SCA.Shared.Entities.Inputs;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SCA.Web.Models.ViewModels
 {
