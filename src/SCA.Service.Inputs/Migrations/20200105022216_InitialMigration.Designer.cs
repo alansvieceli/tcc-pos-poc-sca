@@ -9,8 +9,8 @@ using SCA.Service.Inputs.Data;
 namespace SCA.Service.Inputs.Migrations
 {
     [DbContext(typeof(InputsContext))]
-    [Migration("20191227005602_InicialTabelas")]
-    partial class InicialTabelas
+    [Migration("20200105022216_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -19,25 +19,26 @@ namespace SCA.Service.Inputs.Migrations
                 .HasAnnotation("ProductVersion", "3.1.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("SCA.Service.Inputs.Entities.Insumo", b =>
+            modelBuilder.Entity("SCA.Shared.Entities.Inputs.Insumo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("DataAquisicao")
+                    b.Property<DateTime>("DataCadastro")
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Descricao")
+                        .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int?>("MarcaId")
+                    b.Property<int>("MarcaId")
                         .HasColumnType("int");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TipoId")
+                    b.Property<int>("TipoId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -49,7 +50,7 @@ namespace SCA.Service.Inputs.Migrations
                     b.ToTable("Insumo");
                 });
 
-            modelBuilder.Entity("SCA.Service.Inputs.Entities.Marca", b =>
+            modelBuilder.Entity("SCA.Shared.Entities.Inputs.Marca", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -63,7 +64,7 @@ namespace SCA.Service.Inputs.Migrations
                     b.ToTable("Marca");
                 });
 
-            modelBuilder.Entity("SCA.Service.Inputs.Entities.Tipo", b =>
+            modelBuilder.Entity("SCA.Shared.Entities.Inputs.Tipo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -77,15 +78,19 @@ namespace SCA.Service.Inputs.Migrations
                     b.ToTable("Tipo");
                 });
 
-            modelBuilder.Entity("SCA.Service.Inputs.Entities.Insumo", b =>
+            modelBuilder.Entity("SCA.Shared.Entities.Inputs.Insumo", b =>
                 {
-                    b.HasOne("SCA.Service.Inputs.Entities.Marca", "Marca")
+                    b.HasOne("SCA.Shared.Entities.Inputs.Marca", "Marca")
                         .WithMany()
-                        .HasForeignKey("MarcaId");
+                        .HasForeignKey("MarcaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("SCA.Service.Inputs.Entities.Tipo", "Tipo")
+                    b.HasOne("SCA.Shared.Entities.Inputs.Tipo", "Tipo")
                         .WithMany()
-                        .HasForeignKey("TipoId");
+                        .HasForeignKey("TipoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

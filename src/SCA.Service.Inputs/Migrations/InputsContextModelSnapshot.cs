@@ -17,7 +17,7 @@ namespace SCA.Service.Inputs.Migrations
                 .HasAnnotation("ProductVersion", "3.1.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("SCA.Shared.Entities.Insumo", b =>
+            modelBuilder.Entity("SCA.Shared.Entities.Inputs.Insumo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -48,7 +48,7 @@ namespace SCA.Service.Inputs.Migrations
                     b.ToTable("Insumo");
                 });
 
-            modelBuilder.Entity("SCA.Shared.Entities.Marca", b =>
+            modelBuilder.Entity("SCA.Shared.Entities.Inputs.Marca", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -62,7 +62,7 @@ namespace SCA.Service.Inputs.Migrations
                     b.ToTable("Marca");
                 });
 
-            modelBuilder.Entity("SCA.Shared.Entities.Tipo", b =>
+            modelBuilder.Entity("SCA.Shared.Entities.Inputs.Tipo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -76,15 +76,15 @@ namespace SCA.Service.Inputs.Migrations
                     b.ToTable("Tipo");
                 });
 
-            modelBuilder.Entity("SCA.Shared.Entities.Insumo", b =>
+            modelBuilder.Entity("SCA.Shared.Entities.Inputs.Insumo", b =>
                 {
-                    b.HasOne("SCA.Shared.Entities.Marca", "Marca")
+                    b.HasOne("SCA.Shared.Entities.Inputs.Marca", "Marca")
                         .WithMany()
                         .HasForeignKey("MarcaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SCA.Shared.Entities.Tipo", "Tipo")
+                    b.HasOne("SCA.Shared.Entities.Inputs.Tipo", "Tipo")
                         .WithMany()
                         .HasForeignKey("TipoId")
                         .OnDelete(DeleteBehavior.Cascade)

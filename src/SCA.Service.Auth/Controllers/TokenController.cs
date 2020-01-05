@@ -15,12 +15,6 @@ namespace SCA.Service.Auth.Controllers
             this._authService = authService;
         }
 
-        [HttpGet]
-        public IActionResult Index()
-        {
-            return Content("*** SCA.Service.Auth ***");
-        }
-
         [HttpPost]
         [Route("authenticate")]
         public IActionResult Generate([Bind("user,password")] LoginDto user)

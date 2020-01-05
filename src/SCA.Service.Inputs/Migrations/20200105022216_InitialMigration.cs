@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SCA.Service.Inputs.Migrations
 {
-    public partial class InicialTabelas : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -40,11 +40,11 @@ namespace SCA.Service.Inputs.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    MarcaId = table.Column<int>(nullable: true),
-                    TipoId = table.Column<int>(nullable: true),
+                    MarcaId = table.Column<int>(nullable: false),
+                    TipoId = table.Column<int>(nullable: false),
                     Status = table.Column<int>(nullable: false),
-                    Descricao = table.Column<string>(nullable: true),
-                    DataAquisicao = table.Column<DateTime>(nullable: false)
+                    Descricao = table.Column<string>(nullable: false),
+                    DataCadastro = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -54,13 +54,13 @@ namespace SCA.Service.Inputs.Migrations
                         column: x => x.MarcaId,
                         principalTable: "Marca",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Insumo_Tipo_TipoId",
                         column: x => x.TipoId,
                         principalTable: "Tipo",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
