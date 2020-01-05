@@ -7,7 +7,7 @@ namespace SCA.Service.Inputs.Data
 {
     public class SeedingService
     {
-        private InputsContext _context;
+        private readonly InputsContext _context;
 
         public SeedingService(InputsContext context)
         {

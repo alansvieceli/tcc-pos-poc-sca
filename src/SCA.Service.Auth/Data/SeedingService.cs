@@ -6,7 +6,7 @@ namespace SCA.Service.Inputs.Data
 {
     public class SeedingService
     {
-        private AuthContext _context;
+        private readonly AuthContext _context;
 
         public SeedingService(AuthContext context)
         {
