@@ -3,9 +3,9 @@ using SCA.Shared.Entities.Monitoring;
 
 namespace SCA.Service.Monitoring.Data
 {
-    public class MonitoringContext : DbContext
+    public class MonitoramentoContext : DbContext
     {
-        public MonitoringContext(DbContextOptions<MonitoringContext> options) : base(options)
+        public MonitoramentoContext(DbContextOptions<MonitoramentoContext> options) : base(options)
         {
         }
 

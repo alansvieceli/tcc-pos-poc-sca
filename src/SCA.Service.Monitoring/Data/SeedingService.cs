@@ -8,9 +8,9 @@ namespace SCA.Service.Monitoring.Data
 {
     public class SeedingService
     {
-        private readonly MonitoringContext _context;
+        private readonly MonitoramentoContext _context;
 
-        public SeedingService(MonitoringContext context)
+        public SeedingService(MonitoramentoContext context)
         {
             _context = context;
         }
@@ -30,8 +30,8 @@ namespace SCA.Service.Monitoring.Data
             Barragem b1 = new Barragem { Id = 1, RegiaoId = 1, Regiao = r1, Descricao = "Barragem Forquilha I", DataCadastro = new DateTime(2019, 10, 7) };
             Barragem b2 = new Barragem { Id = 2, RegiaoId = 1, Regiao = r1, Descricao = "Barragem Forquilha II", DataCadastro = new DateTime(2019, 10, 9) };
             Barragem b3 = new Barragem { Id = 3, RegiaoId = 1, Regiao = r1, Descricao = "Barragem Forquilha III", DataCadastro = new DateTime(2019, 10, 10) };
-            Barragem b4 = new Barragem { Id = 4, RegiaoId = 2, Regiao = r2, Descricao = "Barragem Forquilha III", DataCadastro = new DateTime(2019, 11, 5) };
-            Barragem b5 = new Barragem { Id = 5, RegiaoId = 2, Regiao = r2, Descricao = "Barragem Forquilha III", DataCadastro = new DateTime(2019, 11, 9) };
+            Barragem b4 = new Barragem { Id = 4, RegiaoId = 2, Regiao = r2, Descricao = "Barragem Capitão do Mato", DataCadastro = new DateTime(2019, 11, 5) };
+            Barragem b5 = new Barragem { Id = 5, RegiaoId = 2, Regiao = r2, Descricao = "Barragem Taquaras", DataCadastro = new DateTime(2019, 11, 9) };
             Barragem b6 = new Barragem { Id = 6, RegiaoId = 3, Regiao = r3, Descricao = "Barragem Menezes II", DataCadastro = new DateTime(2019, 11, 23) };
 
             Sensor s1 = new Sensor { Id = 1, BarragemId = 1, Barragem = b1, Descricao = "Nível de Água", DataCadastro = new DateTime(2019, 10, 7) };
@@ -41,7 +41,7 @@ namespace SCA.Service.Monitoring.Data
             Sensor s5 = new Sensor { Id = 5, BarragemId = 1, Barragem = b1, Descricao = "Sensores termais (Vazamento)", DataCadastro = new DateTime(2019, 10, 7) };
 
             Sensor s6 = new Sensor { Id = 6, BarragemId = 2, Barragem = b2, Descricao = "Nível de Água", DataCadastro = new DateTime(2019, 10, 9) };
-            Sensor s7 = new Sensor { Id = 9, BarragemId = 2, Barragem = b2, Descricao = "Pressão da Água", DataCadastro = new DateTime(2019, 10, 9) };
+            Sensor s7 = new Sensor { Id = 7, BarragemId = 2, Barragem = b2, Descricao = "Pressão da Água", DataCadastro = new DateTime(2019, 10, 9) };
             Sensor s8 = new Sensor { Id = 8, BarragemId = 2, Barragem = b2, Descricao = "Piezómetro (Compressibilidade dos líquidos)", DataCadastro = new DateTime(2019, 10, 9) };
             Sensor s9 = new Sensor { Id = 9, BarragemId = 2, Barragem = b2, Descricao = "Inclinômetros", DataCadastro = new DateTime(2019, 10, 9) };
             Sensor s10 = new Sensor { Id = 10, BarragemId = 2, Barragem = b2, Descricao = "Sensores termais (Vazamento)", DataCadastro = new DateTime(2019, 10, 9) };
@@ -76,7 +76,7 @@ namespace SCA.Service.Monitoring.Data
 
             _context.Sensor.AddRange(
                 s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s11, s12, s13, s14, s15, 
-                s16, s17, s18, s19, s20, s21, s22, s23, s24, s25, s26, s27, s28, s29, s30);
+                s16, s17, s18, s19, s20, s21, s22, s23, s24, s25, s26, s27, s28, s29, s30);                
 
             _context.SaveChanges();
 

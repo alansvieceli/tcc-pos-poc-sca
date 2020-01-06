@@ -14,7 +14,6 @@ namespace SCA.Shared.Entities.Monitoring
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         [Display(Name = "Data de Cadastro")]
         public DateTime DataCadastro { get; set; }
-        public ICollection<SensorHistorico> Sensores { get; set; } = new List<SensorHistorico>();
 
     }
 }

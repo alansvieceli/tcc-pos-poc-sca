@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using SCA.Service.Monitoring.Data;
+using SCA.Service.Monitoring.Services;
 using SCA.Shared.Extensions;
 
 namespace SCA.Monitoring
@@ -21,13 +22,16 @@ namespace SCA.Monitoring
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
-            services.AddContexto<MonitoringContext>(Configuration.GetConnectionString("MonitoringContext"), "SCA.Service.Monitoring");
+            services.AddContexto<MonitoramentoContext>(Configuration.GetConnectionString("MonitoringContext"), "SCA.Service.Monitoring");
 
             services.AddAutenticacao();
 
             services.AddScoped<SeedingService>();
+            services.AddScoped<RegiaoService>();
+            services.AddScoped<BarragemService>();
+            services.AddScoped<SensorService>();
 
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "SCA.Service.Monitoring", Version = "v1" });

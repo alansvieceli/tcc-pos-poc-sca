@@ -10,5 +10,10 @@ namespace SCA.Shared.Entities.Monitoring
         public string UF { get; set; }
         public string Cidade { get; set; }
         public ICollection<Barragem> Barragens { get; set; } = new List<Barragem>();
+
+        public void AddBarragem(Barragem b)
+        {
+            Barragens.Add(b);
+        }
     }
 }
