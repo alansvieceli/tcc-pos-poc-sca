@@ -1,0 +1,72 @@
+﻿@model SCA.Shared.Entities.Auth.User
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div style="padding-top:50px;">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="row">
+            <div class="col-11 col-sm-8 col-md-6">
+                <div style="">
+                    <h1>Bem-Vindo</h1>
+                    <h3>SCA - Sistema de Controle Ambiental</h3>
+                </div>
+            </div>
+        </div>
+    } else
+    {
+        <div class="row justify-content-center">
+            <div class="col-11 col-sm-8 col-md-6">
+                <div>
+                    @using (Html.BeginForm("LoginUser", "Home", FormMethod.Post, new { role = "form" }))
+                    {
+                        <div>
+                            @Html.AntiForgeryToken()
+                            <div>
+                                <label>User ID</label><br />
+                            </div>
+                            <div>
+                                @Html.TextBoxFor(m => m.UserId, new { @class = "form-control txtbox" })
+                            </div>
+                            <div style="padding-top:20px;"></div>
+                            <div>
+                                <label>Password</label><br />
+                            </div>
+                            <div>
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control txtbox" })
+                            </div>
+                        </div>
+                        <div>
+                            <div style="padding-top:20px;">
+                                <input class="btn btn-primary btn-lg rph-login-button" type="submit" value="Login" />
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-11 col-sm-8 col-md-6">
+                <div style="padding-top:20px;">
+                    <hr>
+                    @Html.ActionLink("Verificar barreira na sua região", "Action", "Controller")
+                    <hr>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-11 col-sm-8 col-md-6">
+                <div style="padding-top:20px;">
+                    <div style="padding-top:10px;">
+                        <ui style="list-style: none;">
+                            <li>admin@company.com  - ADMIN - admin</li>
+                            <li>monitor@company.com  - MONITOR - monitor</li>
+                            <li>user@company.com  - USER_COMMON - user</li>
+                        </ui>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

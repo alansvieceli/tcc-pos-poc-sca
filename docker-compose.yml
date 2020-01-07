@@ -28,7 +28,7 @@ services:
     image: authentication
     build:
       context: .
-      dockerfile: src/SCA.Service.Auth/Dockerfile
+      dockerfile: SCA.Service.Auth/Dockerfile
     ports:
       - "6001:80"
     env_file:
@@ -36,11 +36,11 @@ services:
     depends_on:
       - admin_db      
       
-  input:
-    image: input
+  inputs:
+    image: inputs
     build:
       context: .
-      dockerfile: src/SCA.Service.Inputs/Dockerfile
+      dockerfile: SCA.Service.Inputs/Dockerfile
     ports:
       - "6002:80"
     env_file:
@@ -52,7 +52,7 @@ services:
     image: maintenance
     build:
       context: .
-      dockerfile: src/SCA.Service.Maintenance/Dockerfile
+      dockerfile: SCA.Service.Maintenance/Dockerfile
     ports:
       - "6003:80"
     env_file:
@@ -64,7 +64,7 @@ services:
     image: monitoring
     build:
       context: .
-      dockerfile: src/SCA.Service.Monitoring/Dockerfile
+      dockerfile: SCA.Service.Monitoring/Dockerfile
     ports:
       - "6004:80"
     env_file:
@@ -76,14 +76,14 @@ services:
     image: gateway
     build:
       context: .
-      dockerfile: src/SCA.Gateway/Dockerfile
+      dockerfile: SCA.Gateway/Dockerfile
     ports:
       - "7000:80"
     env_file:
       - services.env
     depends_on:
       - authentication
-      - input
+      - inputs
       - maintenance
       - monitoring
       
