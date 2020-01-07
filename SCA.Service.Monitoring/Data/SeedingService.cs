@@ -36,13 +36,13 @@ namespace SCA.Service.Monitoring.Data
 
             Sensor s1 = new Sensor { Id = 1, BarragemId = 1, Barragem = b1, Descricao = "Nível de Água", DataCadastro = new DateTime(2019, 10, 7) };
             Sensor s2 = new Sensor { Id = 2, BarragemId = 1, Barragem = b1, Descricao = "Pressão da Água", DataCadastro = new DateTime(2019, 10, 7) };
-            Sensor s3 = new Sensor { Id = 3, BarragemId = 1, Barragem = b1, Descricao = "Piezómetro (Compressibilidade dos líquidos)", DataCadastro = new DateTime(2019, 10, 7) };
+//            Sensor s3 = new Sensor { Id = 3, BarragemId = 1, Barragem = b1, Descricao = "Piezómetro (Compressibilidade dos líquidos)", DataCadastro = new DateTime(2019, 10, 7) };
             Sensor s4 = new Sensor { Id = 4, BarragemId = 1, Barragem = b1, Descricao = "Inclinômetros", DataCadastro = new DateTime(2019, 10, 7) };
-            Sensor s5 = new Sensor { Id = 5, BarragemId = 1, Barragem = b1, Descricao = "Sensores termais (Vazamento)", DataCadastro = new DateTime(2019, 10, 7) };
+//            Sensor s5 = new Sensor { Id = 5, BarragemId = 1, Barragem = b1, Descricao = "Sensores termais (Vazamento)", DataCadastro = new DateTime(2019, 10, 7) };
 
             Sensor s6 = new Sensor { Id = 6, BarragemId = 2, Barragem = b2, Descricao = "Nível de Água", DataCadastro = new DateTime(2019, 10, 9) };
             Sensor s7 = new Sensor { Id = 7, BarragemId = 2, Barragem = b2, Descricao = "Pressão da Água", DataCadastro = new DateTime(2019, 10, 9) };
-            Sensor s8 = new Sensor { Id = 8, BarragemId = 2, Barragem = b2, Descricao = "Piezómetro (Compressibilidade dos líquidos)", DataCadastro = new DateTime(2019, 10, 9) };
+//            Sensor s8 = new Sensor { Id = 8, BarragemId = 2, Barragem = b2, Descricao = "Piezómetro (Compressibilidade dos líquidos)", DataCadastro = new DateTime(2019, 10, 9) };
             Sensor s9 = new Sensor { Id = 9, BarragemId = 2, Barragem = b2, Descricao = "Inclinômetros", DataCadastro = new DateTime(2019, 10, 9) };
             Sensor s10 = new Sensor { Id = 10, BarragemId = 2, Barragem = b2, Descricao = "Sensores termais (Vazamento)", DataCadastro = new DateTime(2019, 10, 9) };
 
@@ -56,15 +56,15 @@ namespace SCA.Service.Monitoring.Data
             Sensor s17 = new Sensor { Id = 17, BarragemId = 4, Barragem = b4, Descricao = "Pressão da Água", DataCadastro = new DateTime(2019, 11, 5) };
             Sensor s18 = new Sensor { Id = 18, BarragemId = 4, Barragem = b4, Descricao = "Piezómetro (Compressibilidade dos líquidos)", DataCadastro = new DateTime(2019, 11, 5) };
             Sensor s19 = new Sensor { Id = 19, BarragemId = 4, Barragem = b4, Descricao = "Inclinômetros", DataCadastro = new DateTime(2019, 11, 5) };
-            Sensor s20 = new Sensor { Id = 20, BarragemId = 4, Barragem = b4, Descricao = "Sensores termais (Vazamento)", DataCadastro = new DateTime(2019, 11, 5) };
+//            Sensor s20 = new Sensor { Id = 20, BarragemId = 4, Barragem = b4, Descricao = "Sensores termais (Vazamento)", DataCadastro = new DateTime(2019, 11, 5) };
 
             Sensor s21 = new Sensor { Id = 21, BarragemId = 5, Barragem = b5, Descricao = "Nível de Água", DataCadastro = new DateTime(2019, 11, 9) };
-            Sensor s22 = new Sensor { Id = 22, BarragemId = 5, Barragem = b5, Descricao = "Pressão da Água", DataCadastro = new DateTime(2019, 11, 9) };
-            Sensor s23 = new Sensor { Id = 23, BarragemId = 5, Barragem = b5, Descricao = "Piezómetro (Compressibilidade dos líquidos)", DataCadastro = new DateTime(2019, 11, 9) };
-            Sensor s24 = new Sensor { Id = 24, BarragemId = 5, Barragem = b5, Descricao = "Inclinômetros", DataCadastro = new DateTime(2019, 11, 9) };
+//            Sensor s22 = new Sensor { Id = 22, BarragemId = 5, Barragem = b5, Descricao = "Pressão da Água", DataCadastro = new DateTime(2019, 11, 9) };
+//            Sensor s23 = new Sensor { Id = 23, BarragemId = 5, Barragem = b5, Descricao = "Piezómetro (Compressibilidade dos líquidos)", DataCadastro = new DateTime(2019, 11, 9) };
+//            Sensor s24 = new Sensor { Id = 24, BarragemId = 5, Barragem = b5, Descricao = "Inclinômetros", DataCadastro = new DateTime(2019, 11, 9) };
             Sensor s25 = new Sensor { Id = 25, BarragemId = 5, Barragem = b5, Descricao = "Sensores termais (Vazamento)", DataCadastro = new DateTime(2019, 11, 9) };
 
-            Sensor s26 = new Sensor { Id = 26, BarragemId = 6, Barragem = b6, Descricao = "Nível de Água", DataCadastro = new DateTime(2019, 11, 23) };
+//            Sensor s26 = new Sensor { Id = 26, BarragemId = 6, Barragem = b6, Descricao = "Nível de Água", DataCadastro = new DateTime(2019, 11, 23) };
             Sensor s27 = new Sensor { Id = 27, BarragemId = 6, Barragem = b6, Descricao = "Pressão da Água", DataCadastro = new DateTime(2019, 11, 23) };
             Sensor s28 = new Sensor { Id = 28, BarragemId = 6, Barragem = b6, Descricao = "Piezómetro (Compressibilidade dos líquidos)", DataCadastro = new DateTime(2019, 11, 23) };
             Sensor s29 = new Sensor { Id = 29, BarragemId = 6, Barragem = b6, Descricao = "Inclinômetros", DataCadastro = new DateTime(2019, 11, 23) };
