@@ -9,7 +9,7 @@ services:
       - 3306:3306
       - 33060:33060
     env_file:
-      - var.env
+      - mysql.env
     volumes:
       # Volume dos dados 
       - ./dados:/var/lib/mysql
@@ -17,26 +17,58 @@ services:
   admin_db:
     container_name: mysql-admin-01
     image: nazarpc/phpmyadmin
-    depends_on:
-      - db
     links:
       - db:mysql
     ports:
       - 8082:80
+    depends_on:
+      - db
 
   authentication:
     image: authentication
     build:
       context: .
       dockerfile: src/SCA.Service.Auth/Dockerfile
+    ports:
+      - "6001:80"
+    env_file:
+      - services.env
     depends_on:
-      - admin_db
+      - admin_db      
       
   input:
     image: input
     build:
       context: .
       dockerfile: src/SCA.Service.Inputs/Dockerfile
+    ports:
+      - "6002:80"
+    env_file:
+      - services.env
+    depends_on:
+      - admin_db
+      
+  maintenance:
+    image: maintenance
+    build:
+      context: .
+      dockerfile: src/SCA.Service.Maintenance/Dockerfile
+    ports:
+      - "6003:80"
+    env_file:
+      - services.env
+    depends_on:
+      - admin_db
+      
+  monitoring:
+    image: monitoring
+    build:
+      context: .
+      dockerfile: src/SCA.Service.Monitoring/Dockerfile
+    ports:
+      - "6004:80"
+    env_file:
+      - services.env
     depends_on:
       - admin_db
       
@@ -45,7 +77,13 @@ services:
     build:
       context: .
       dockerfile: src/SCA.Gateway/Dockerfile
+    ports:
+      - "7000:80"
+    env_file:
+      - services.env
     depends_on:
       - authentication
       - input
+      - maintenance
+      - monitoring
       
