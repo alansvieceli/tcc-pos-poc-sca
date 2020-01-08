@@ -1,18 +1,18 @@
 ﻿
-@model SCA.Shared.Entities.Monitoring.Barragem
+@model SCA.Shared.Entities.Monitoring.Sensor
 
 @{
     ViewData["Title"] = Model.Descricao;
 }
 
-<h1>@ViewData["Title"] / Sensores</h1>
+<h1>@ViewData["Title"] / Histórico</h1>
 
 <p>
     <i class="fas fa-search" aria-hidden="true"></i>
     <input class="form-control" id="buscar" type="text" placeholder="Pesquisar" aria-label="Pesquisar">
 </p>
 
-@{var sensor = Model.Sensores.FirstOrDefault(); }
+@{var sensor = Model.Historico.FirstOrDefault(); }
 
 <table class="table table-striped table-hover">
     <thead>
@@ -21,19 +21,15 @@
                 @Html.DisplayNameFor(model => sensor.Id)
             </th>
             <th style="width: 60%">
-                @Html.DisplayNameFor(model => sensor.Descricao)
+                @Html.DisplayNameFor(model => sensor.Status)
             </th>
             <th>
-                @Html.DisplayNameFor(model => sensor.DataCadastro)
+                @Html.DisplayNameFor(model => sensor.Data)
             </th>
-            <th style="text-align: center">
-                Status
-            </th>
-            <th></th>
         </tr>
     </thead>
     <tbody id="dados">
-        @foreach (var item in Model.Sensores)
+        @foreach (var item in Model.Historico)
         {
             string style = "flag_red";
             <tr>
@@ -41,16 +37,10 @@
                     @Html.DisplayFor(modelItem => item.Id)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Descricao)
+                    @Html.DisplayFor(modelItem => item.Status)
                 </td>               
                 <td>
-                    @Html.DisplayFor(modelItem => item.DataCadastro)
-                </td>
-                <td style="text-align: center">
-                    <div class="flag @style"></div>
-                </td>
-                <td>
-                    @Html.ActionLink("Histórico", "Details", "Sensor", new { id = item.Id })
+                    @Html.DisplayFor(modelItem => item.Data)
                 </td>
             </tr>
         }
@@ -58,7 +48,7 @@
 </table>
 
 <div>
-    @Html.ActionLink("Voltar para lista de barragens", "Index", "Monitoramento")
+    @Html.ActionLink("Voltar para lista de senores", "Details", "Barragem", new { id = Model.BarragemId })
 </div>
 
 

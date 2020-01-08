@@ -11,7 +11,7 @@ namespace SCA.Shared.Entities.Monitoring
         [Display(Name = "Sensor")]
         public int SensorId { get; set; }
         public SensorStatus Status { get; set; }
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy hh:mm:ss}")]
         [Display(Name = "Data de Recebimento")]
         public DateTime Data { get; set; }
     }
