@@ -11,10 +11,11 @@ using SCA.Shared.Dto;
 using Microsoft.AspNetCore.Http;
 using SCA.Shared.Results;
 using Microsoft.Extensions.Configuration;
+using SCA.Shared.CustomController;
 
 namespace SCA.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : ScaController
     {
         private readonly IConfiguration _configuration;
         private string _host;
@@ -27,10 +28,15 @@ namespace SCA.Web.Controllers
             Prepare();
         }
 
-        private void Prepare()
+        protected override void Prepare()
         {
             this._host = this._configuration.GetSection("ConfigApp").GetSection("host").Value;
             this._port = ConfigurationBinder.GetValue<int>(this._configuration.GetSection("ConfigApp"), "port", 80);
+        }
+
+        public override void SetToken(string token)
+        {
+
         }
 
         public IActionResult Index()

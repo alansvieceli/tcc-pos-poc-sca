@@ -7,6 +7,10 @@
 
 <h1>@ViewData["Title"]</h1>
 
+<p>
+    <i class="fas fa-search" aria-hidden="true"></i>
+    <input class="form-control" id="buscar" type="text" placeholder="Pesquisar" aria-label="Pesquisar">
+</p>
 
 @foreach (var regiao in Model)
 {
@@ -26,7 +30,7 @@
                     <th>
                         @Html.DisplayNameFor(model => barragem.DataCadastro)
                     </th>
-                    <th style="width: 60px">Nro.Senrores</th>
+                    <th style="width: 60px">Senrores</th>
                     <th style="text-align: center">Status</th>
                     <th></th>
                 </tr>
@@ -53,7 +57,7 @@
                             <div class="flag @style"></div>
                         </td>
                         <td>
-                            @Html.ActionLink("Detalhes", "Details", new { id = itemBarragem.Id })
+                            @Html.ActionLink("Detalhes", "Details", "Barragem", new { id = itemBarragem.Id })
                         </td>
                     </tr>
                 }

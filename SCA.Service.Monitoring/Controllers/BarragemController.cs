@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SCA.Service.Monitoring.Services;
+using SCA.Shared.CustomAttributes;
+using SCA.Shared.Entities.Enums;
 using SCA.Shared.Entities.Monitoring;
 
 namespace SCA.Service.Monitoring.Controllers

@@ -9,7 +9,7 @@ namespace SCA.Web.Controllers.Filters
     {
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            var controller = (ScaController)context.Controller;
+            var controller = (ScaController) context.Controller;
             controller.SetToken(controller.HttpContext.Session.GetString("JWToken"));
             controller.ViewBag.UserRole = controller.HttpContext.Session.GetString("RoleAcces");
         }

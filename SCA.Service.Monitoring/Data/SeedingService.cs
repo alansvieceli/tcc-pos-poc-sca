@@ -75,8 +75,8 @@ namespace SCA.Service.Monitoring.Data
             _context.Barragem.AddRange(b1, b2, b3, b4, b5, b6);
 
             _context.Sensor.AddRange(
-                s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s11, s12, s13, s14, s15, 
-                s16, s17, s18, s19, s20, s21, s22, s23, s24, s25, s26, s27, s28, s29, s30);                
+                s1, s2, s4, s6, s7, s9, s10, s11, s12, s13, s14, s15, s11, s12, s13, s14, s15, 
+                s16, s17, s18, s19, s21, s25, s27, s28, s29, s30);                
 
             _context.SaveChanges();
 

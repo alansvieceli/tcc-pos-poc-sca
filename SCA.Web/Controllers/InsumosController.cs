@@ -37,7 +37,7 @@ namespace SCA.Web.Controllers
             Prepare();
         }
 
-        private void Prepare()
+        protected override void Prepare()
         {
             string host = this._configuration.GetSection("ConfigApp").GetSection("host").Value;
             int port = ConfigurationBinder.GetValue<int>(this._configuration.GetSection("ConfigApp"), "port", 80);

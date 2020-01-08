@@ -55,6 +55,8 @@ namespace SCA.Monitoring
 
             app.UseRouting();
 
+            app.UseAuthentication();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => {
