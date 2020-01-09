@@ -1,5 +1,6 @@
 ﻿
 @model SCA.Shared.Entities.Monitoring.Sensor
+@using SCA.Shared.Utils;
 
 @{
     ViewData["Title"] = Model.Descricao;
@@ -12,7 +13,10 @@
     <input class="form-control" id="buscar" type="text" placeholder="Pesquisar" aria-label="Pesquisar">
 </p>
 
-@{var sensor = Model.Historico.FirstOrDefault(); }
+@{
+    var sensor = Model.Historico.FirstOrDefault();
+    var historico = Model.GetHistoricoOrdenado();
+}
 
 <table class="table table-striped table-hover">
     <thead>
@@ -20,27 +24,27 @@
             <th style="width: 30px">
                 @Html.DisplayNameFor(model => sensor.Id)
             </th>
-            <th style="width: 60%">
-                @Html.DisplayNameFor(model => sensor.Status)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => sensor.Data)
+            </th>
+            <th style="width: 60%">
+                @Html.DisplayNameFor(model => sensor.Status)
             </th>
         </tr>
     </thead>
     <tbody id="dados">
-        @foreach (var item in Model.Historico)
+        @foreach (var item in historico)
         {
-            string style = "flag_red";
+            string style = Functions.GetStyleStatus(item.Status);
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Id)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Status)
-                </td>               
-                <td>
                     @Html.DisplayFor(modelItem => item.Data)
+                </td>
+                <td style="text-align: center">
+                    <div class="flag @style"></div>
                 </td>
             </tr>
         }

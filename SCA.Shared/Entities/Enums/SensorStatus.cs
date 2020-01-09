@@ -6,6 +6,7 @@ namespace SCA.Shared.Entities.Enums
         Verde = 0,
         Amarelo = 1,
         Vermelho = 2,
-        Preto = 3
+        Preto = 3,
+        NaoDefinido = 4
     }
 }

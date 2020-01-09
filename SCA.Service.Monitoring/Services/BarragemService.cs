@@ -29,7 +29,13 @@ namespace SCA.Service.Monitoring.Services
 
         public async Task<Barragem> FindByIdAsync(int? id)
         {
-            return (id == null) ? null : await _context.Barragem.Include(b => b.Regiao).Include(b => b.Sensores).FirstOrDefaultAsync(b => b.Id == id);
+            return (id == null) ? 
+                null : 
+                await _context.Barragem
+                        .Include(b => b.Regiao)
+                        .Include(b => b.Sensores)
+                            .ThenInclude(s => s.Historico)
+                        .FirstOrDefaultAsync(b => b.Id == id);
         }
 
         public async Task InsertAsync(Barragem barragem)

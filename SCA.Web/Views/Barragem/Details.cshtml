@@ -1,5 +1,6 @@
 ﻿
 @model SCA.Shared.Entities.Monitoring.Barragem
+@using SCA.Shared.Utils;
 
 @{
     ViewData["Title"] = Model.Descricao;
@@ -12,19 +13,19 @@
     <input class="form-control" id="buscar" type="text" placeholder="Pesquisar" aria-label="Pesquisar">
 </p>
 
-@{var sensor = Model.Sensores.FirstOrDefault(); }
+@{var sensorCab = Model.Sensores.FirstOrDefault(); }
 
 <table class="table table-striped table-hover">
     <thead>
         <tr class="bg-light">
             <th style="width: 30px">
-                @Html.DisplayNameFor(model => sensor.Id)
+                @Html.DisplayNameFor(model => sensorCab.Id)
             </th>
             <th style="width: 60%">
-                @Html.DisplayNameFor(model => sensor.Descricao)
+                @Html.DisplayNameFor(model => sensorCab.Descricao)
             </th>
             <th>
-                @Html.DisplayNameFor(model => sensor.DataCadastro)
+                @Html.DisplayNameFor(model => sensorCab.DataCadastro)
             </th>
             <th style="text-align: center">
                 Status
@@ -33,24 +34,25 @@
         </tr>
     </thead>
     <tbody id="dados">
-        @foreach (var item in Model.Sensores)
+        @foreach (var sensor in Model.Sensores)
         {
-            string style = "flag_red";
+
+            string style = Functions.GetStyleStatus(sensor.GetLastStatus());
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Id)
+                    @Html.DisplayFor(modelItem => sensor.Id)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Descricao)
-                </td>               
+                    @Html.DisplayFor(modelItem => sensor.Descricao)
+                </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DataCadastro)
+                    @Html.DisplayFor(modelItem => sensor.DataCadastro)
                 </td>
                 <td style="text-align: center">
                     <div class="flag @style"></div>
                 </td>
                 <td>
-                    @Html.ActionLink("Histórico", "Details", "Sensor", new { id = item.Id })
+                    @Html.ActionLink("Histórico", "Details", "Sensor", new { id = sensor.Id })
                 </td>
             </tr>
         }

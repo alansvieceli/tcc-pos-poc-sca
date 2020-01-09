@@ -1,6 +1,8 @@
-﻿using System;
+﻿using SCA.Shared.Entities.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace SCA.Shared.Entities.Monitoring
 {
@@ -15,6 +17,18 @@ namespace SCA.Shared.Entities.Monitoring
         [Display(Name = "Data de Cadastro")]
         public DateTime DataCadastro { get; set; }
         public ICollection<SensorHistorico> Historico { get; set; } = new List<SensorHistorico>();
+
+        public SensorStatus GetLastStatus()
+        {
+            SensorHistorico sh = Historico.OrderByDescending(x => x.Data).FirstOrDefault();
+            return sh.Status;
+        }
+
+        public ICollection<SensorHistorico> GetHistoricoOrdenado()
+        {
+            return Historico.OrderByDescending(h => h.Data).ToList();
+        }
+
 
     }
 }
