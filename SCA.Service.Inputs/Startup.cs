@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
 using SCA.Service.Inputs.Data;
 using SCA.Service.Inputs.Services;
 using SCA.Shared.Extensions;
@@ -33,9 +32,7 @@ namespace SCA.Service.Inputs
             services.AddScoped<MarcaService>();
             services.AddScoped<TipoService>();
 
-            services.AddSwaggerGen(c => {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "SCA.Service.Inputs", Version = "v1" });
-            });
+            services.AddSwaggerDocumentation("SCA.Service.Inputs");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,9 +46,7 @@ namespace SCA.Service.Inputs
 
             app.UseSwagger();
 
-            app.UseSwaggerUI(c => {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "SCA.Service.Inputs V1");
-            });
+            app.UseSwaggerDocumentation("SCA.Service.Inputs v1.0");
 
             app.UseRouting();
 

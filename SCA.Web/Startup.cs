@@ -1,17 +1,10 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
-using SCA.Shared.Domain.Properties;
+using SCA.Shared.Extensions;
 using SCA.Shared.Services;
 
 namespace SCA.Web
@@ -34,33 +27,7 @@ namespace SCA.Web
 
             services.AddControllersWithViews();
 
-            //Provide a secret key to Encrypt and Decrypt the Token
-            var SecretKey = Encoding.ASCII.GetBytes(Token.Key);
-            //Configure JWT Token Authentication
-            services.AddAuthentication(auth => {
-                auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(token => {
-                token.RequireHttpsMetadata = false;
-                token.SaveToken = true;
-                token.TokenValidationParameters = new TokenValidationParameters {
-                    ValidateIssuerSigningKey = true,
-                    //Same Secret key will be used while creating the token
-                    IssuerSigningKey = new SymmetricSecurityKey(SecretKey),
-                    ValidateIssuer = true,
-                    //Usually, this is your application base URL
-                    ValidIssuer = Token.Issuer,
-                    ValidateAudience = true,
-                    //Here, we are creating and using JWT within the same application.
-                    //In this case, base URL is fine.
-                    //If the JWT is created using a web service, then this would be the consumer URL.
-                    ValidAudience = Token.Audience,
-                    RequireExpirationTime = true,
-                    ValidateLifetime = true,
-                    ClockSkew = TimeSpan.Zero
-                };
-            });
+            services.AddAutenticacao();
 
             services.AddScoped(typeof(IGenericService<>), typeof(GenericService<>));
         }
@@ -79,19 +46,8 @@ namespace SCA.Web
 
             app.UseRouting();
 
-            //Add User session
-            app.UseSession();
+            app.AddTokenInRequest();
 
-            //Add JWToken to all incoming HTTP Request Header
-            app.Use(async (context, next) => {
-                var JWToken = context.Session.GetString("JWToken");
-                if (!string.IsNullOrEmpty(JWToken))
-                {
-                    context.Request.Headers.Add("Authorization", "Bearer " + JWToken);
-                }
-                await next();
-            });
-            //Add JWToken Authentication service
             app.UseAuthentication();
 
             app.UseAuthorization();
