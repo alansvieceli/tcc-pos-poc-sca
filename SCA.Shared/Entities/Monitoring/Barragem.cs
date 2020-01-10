@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SCA.Shared.Entities.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
@@ -16,6 +17,21 @@ namespace SCA.Shared.Entities.Monitoring
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         [Display(Name = "Data de Cadastro")]
         public DateTime DataCadastro { get; set; }
-        public ICollection<Sensor> Sensores { get; set; } = new List<Sensor>();    
+        public ICollection<Sensor> Sensores { get; set; } = new List<Sensor>();
+
+        public SensorStatus GetLastStatus()
+        {
+            SensorStatus r = SensorStatus.NaoDefinido;
+            foreach (Sensor sensor in Sensores)
+            {
+                SensorStatus ss = sensor.GetLastStatus();
+                if (ss > r)
+                {
+                    r = ss;
+                }
+            }
+
+            return r;
+        }
     }
 }

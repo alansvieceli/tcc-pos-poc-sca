@@ -58,6 +58,7 @@ namespace SCA.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
+
             return View(await _barragemService.FindAllAsync());
         }
 

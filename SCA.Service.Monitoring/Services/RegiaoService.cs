@@ -23,6 +23,7 @@ namespace SCA.Service.Monitoring.Services
             return await _context.Regiao
                 .Include(r => r.Barragens)
                     .ThenInclude(b => b.Sensores)
+                        .ThenInclude(s => s.Historico)
                 .OrderBy(t => t.UF)
                 .ToListAsync();
         }

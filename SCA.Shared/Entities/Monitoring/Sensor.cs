@@ -21,7 +21,16 @@ namespace SCA.Shared.Entities.Monitoring
         public SensorStatus GetLastStatus()
         {
             SensorHistorico sh = Historico.OrderByDescending(x => x.Data).FirstOrDefault();
+            if (sh == null)
+            {
+                return SensorStatus.NaoDefinido;
+            }
             return sh.Status;
+        }
+
+        public SensorHistorico GetLastSensorHistorico()
+        {
+            return Historico.OrderByDescending(x => x.Data).FirstOrDefault();
         }
 
         public ICollection<SensorHistorico> GetHistoricoOrdenado()

@@ -1,11 +1,12 @@
 ﻿
 @model IEnumerable<SCA.Shared.Entities.Monitoring.Regiao>
+@using SCA.Shared.Utils;
 
 @{
     ViewData["Title"] = "Monitoramento";
 }
 
-    <h1>@ViewData["Title"] / Barragens</h1>
+<h1>@ViewData["Title"] / Barragens</h1>
 
 <p>
     <i class="fas fa-search" aria-hidden="true"></i>
@@ -38,7 +39,8 @@
             <tbody id="dados">
                 @foreach (var itemBarragem in regiao.Barragens)
                 {
-                    string style = "flag_red";
+                    var sh = itemBarragem.GetLastStatus();
+                    string style = Functions.GetStyleStatus(sh);
                     int count = itemBarragem.Sensores.Count;
                     <tr>
                         <td>

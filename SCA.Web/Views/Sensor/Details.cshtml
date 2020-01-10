@@ -24,10 +24,10 @@
             <th style="width: 30px">
                 @Html.DisplayNameFor(model => sensor.Id)
             </th>
-            <th>
+            <th style="width: 230px">
                 @Html.DisplayNameFor(model => sensor.Data)
             </th>
-            <th style="width: 60%">
+            <th>
                 @Html.DisplayNameFor(model => sensor.Status)
             </th>
         </tr>
@@ -43,7 +43,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Data)
                 </td>
-                <td style="text-align: center">
+                <td style="padding-left:30px;">
                     <div class="flag @style"></div>
                 </td>
             </tr>

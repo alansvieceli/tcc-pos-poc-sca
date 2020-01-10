@@ -21,23 +21,24 @@
             <th style="width: 30px">
                 @Html.DisplayNameFor(model => sensorCab.Id)
             </th>
-            <th style="width: 60%">
+            <th>
                 @Html.DisplayNameFor(model => sensorCab.Descricao)
             </th>
-            <th>
+            <th  style="width: 160px">
                 @Html.DisplayNameFor(model => sensorCab.DataCadastro)
             </th>
             <th style="text-align: center">
                 Status
             </th>
+            <th  style="width: 180px">Último Contato</th>
             <th></th>
         </tr>
     </thead>
     <tbody id="dados">
         @foreach (var sensor in Model.Sensores)
         {
-
-            string style = Functions.GetStyleStatus(sensor.GetLastStatus());
+            var sh = sensor.GetLastSensorHistorico();
+            string style = Functions.GetStyleStatus(sh.Status);
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => sensor.Id)
@@ -50,6 +51,9 @@
                 </td>
                 <td style="text-align: center">
                     <div class="flag @style"></div>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => sh.Data)
                 </td>
                 <td>
                     @Html.ActionLink("Histórico", "Details", "Sensor", new { id = sensor.Id })
