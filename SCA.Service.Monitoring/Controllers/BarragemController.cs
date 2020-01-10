@@ -19,20 +19,20 @@ namespace SCA.Service.Monitoring.Controllers
 
         public BarragemController(BarragemService service)
         {
-            _barragemService = service;
+            this._barragemService = service;
         }
 
         [HttpGet]
         public async Task<IEnumerable<Barragem>> Barragem()
         {
-            return await _barragemService.FindAllAsync();
+            return await this._barragemService.FindAllAsync();
         }
 
         [HttpGet]
         [Route("{id}")]
         public async Task<Barragem> Details(int? id)
         {
-            var barragem = await _barragemService.FindByIdAsync(id);
+            var barragem = await this._barragemService.FindByIdAsync(id);
             if (barragem == null)
             {
                 barragem = new Barragem();

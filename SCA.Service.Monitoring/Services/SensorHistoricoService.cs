@@ -22,7 +22,13 @@ namespace SCA.Service.Monitoring.Services
             return await _context.SensorHistorico
                 .OrderByDescending(x => x.Data)
                 .FirstOrDefaultAsync(s => s.SensorId == sensorId);
-                
+
+        }
+
+        public async Task InsertAsync(SensorHistorico historico)
+        {
+            _context.Add(historico);
+            await _context.SaveChangesAsync();
         }
     }
 }

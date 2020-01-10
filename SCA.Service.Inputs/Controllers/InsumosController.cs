@@ -20,20 +20,20 @@ namespace SCA.Service.Inputs.Controllers
 
         public InsumosController(InsumoService service)
         {
-            _insumoService = service;
+            this._insumoService = service;
         }
 
         [HttpGet]
         public async Task<IEnumerable<Insumo>> Index()
         {
-            return await _insumoService.FindAllAsync();
+            return await this._insumoService.FindAllAsync();
         }
 
         [HttpGet]
         [Route("{id}")]
         public async Task<Insumo> Details(int? id)
         {
-            var insumo = await _insumoService.FindByIdAsync(id);
+            var insumo = await this._insumoService.FindByIdAsync(id);
             if (insumo == null)
             {
                 insumo = new Insumo();
@@ -48,7 +48,7 @@ namespace SCA.Service.Inputs.Controllers
             {
                 try
                 {
-                    await _insumoService.InsertAsync(insumo);
+                    await this._insumoService.InsertAsync(insumo);
                     return Ok(new ResultApi(true));
                 }
                 catch (ApplicationException e)
@@ -73,7 +73,7 @@ namespace SCA.Service.Inputs.Controllers
             {
                 try
                 {
-                    await _insumoService.UpdateAsync(insumo);
+                    await this._insumoService.UpdateAsync(insumo);
                 }
                 catch (ApplicationException e)
                 {
@@ -88,7 +88,7 @@ namespace SCA.Service.Inputs.Controllers
         [Route("{id}")]
         public async Task<IActionResult> Delete(int? id)
         {
-            var insumo = await _insumoService.FindByIdAsync(id);
+            var insumo = await this._insumoService.FindByIdAsync(id);
             if (insumo == null)
             {
                 return Ok(new ResultApi(false, "Id não encontrado"));
@@ -97,7 +97,7 @@ namespace SCA.Service.Inputs.Controllers
             insumo.Status = InsumosStatus.Inativo;
             try
             {
-                await _insumoService.UpdateAsync(insumo);
+                await this._insumoService.UpdateAsync(insumo);
             }
             catch (ApplicationException e)
             {

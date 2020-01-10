@@ -4,8 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SCA.Service.Monitoring.Services;
-using SCA.Shared.CustomAttributes;
-using SCA.Shared.Entities.Enums;
 using SCA.Shared.Entities.Monitoring;
 using SCA.Shared.Results;
 
@@ -13,29 +11,26 @@ namespace SCA.Service.Monitoring.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize(Role.ADMIN, Role.MONITOR)]
-    public class SensorHistoricoController : Controller
+    public class PublicoController : Controller
     {
         private readonly SensorHistoricoService _sensorHistoricoService;
+        private readonly RegiaoService _regiaoService;
 
-        public SensorHistoricoController(SensorHistoricoService service)
+        public PublicoController(SensorHistoricoService sensorHistoricoService, RegiaoService regiaoService)
         {
-            this._sensorHistoricoService = service;
+            this._sensorHistoricoService = sensorHistoricoService;
+            this._regiaoService = regiaoService;
         }
 
         [HttpGet]
-        [Route("LastBySensor/{id}")]
-        public async Task<SensorHistorico> Details(int? id)
+        [Route("regiao")]
+        public async Task<IEnumerable<Regiao>> Regiao()
         {
-            var sensor = await this._sensorHistoricoService.FindLastBySensorAsync(id);
-            if (sensor == null)
-            {
-                sensor = new SensorHistorico();
-            }
-            return sensor;
+            return await this._regiaoService.SimpleFindAllAsync();
         }
 
         [HttpPost]
+        [Route("check")]
         public async Task<IActionResult> Create(SensorHistorico historico)
         {
             if (ModelState.IsValid)

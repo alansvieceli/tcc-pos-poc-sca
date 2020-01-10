@@ -17,20 +17,20 @@ namespace SCA.Service.Inputs.Controllers
 
         public TiposController(TipoService service)
         {
-            _insumoService = service;
+            this._insumoService = service;
         }
 
         [HttpGet]
         public async Task<IEnumerable<Tipo>> Index()
         {
-            return await _insumoService.FindAllAsync();
+            return await this._insumoService.FindAllAsync();
         }
 
         [HttpGet]
         [Route("detail/{id}")]
         public async Task<Tipo> Details(int? id)
         {
-            var insumo = await _insumoService.FindByIdAsync(id);
+            var insumo = await this._insumoService.FindByIdAsync(id);
             if (insumo == null)
             {
                 insumo = new Tipo();

@@ -20,20 +20,20 @@ namespace SCA.Monitoring.Controllers
 
         public SensorController(SensorService service)
         {
-            _sensorService = service;
+            this._sensorService = service;
         }
 
         [HttpGet]
         public async Task<IEnumerable<Sensor>> Sensor()
         {
-            return await _sensorService.FindAllAsync();
+            return await this._sensorService.FindAllAsync();
         }
 
         [HttpGet]
         [Route("{id}")]
         public async Task<Sensor> Details(int? id)
         {
-            var sensor = await _sensorService.FindByIdAsync(id);
+            var sensor = await this._sensorService.FindByIdAsync(id);
             if (sensor == null)
             {
                 sensor = new Sensor();

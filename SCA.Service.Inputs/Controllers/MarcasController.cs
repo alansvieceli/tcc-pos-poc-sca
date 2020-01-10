@@ -17,20 +17,20 @@ namespace SCA.Service.Inputs.Controllers
 
         public MarcasController(MarcaService service)
         {
-            _marcaService = service;
+            this._marcaService = service;
         }
 
         [HttpGet]
         public async Task<IEnumerable<Marca>> Index()
         {
-            return await _marcaService.FindAllAsync();
+            return await this._marcaService.FindAllAsync();
         }
 
         [HttpGet]
         [Route("detail/{id}")]
         public async Task<Marca> Details(int? id)
         {
-            var insumo = await _marcaService.FindByIdAsync(id);
+            var insumo = await this._marcaService.FindByIdAsync(id);
             if (insumo == null)
             {
                 insumo = new Marca();

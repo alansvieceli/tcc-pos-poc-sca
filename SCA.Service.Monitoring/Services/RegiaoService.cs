@@ -28,6 +28,11 @@ namespace SCA.Service.Monitoring.Services
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<Regiao>> SimpleFindAllAsync()
+        {
+            return await _context.Regiao.OrderBy(r => r.UF).ToListAsync();
+        }
+
         public async Task<Regiao> FindByIdAsync(int? id)
         {
             return (id == null) ? null : await _context.Regiao.Include(i => i.Barragens).ThenInclude(b => b.Sensores).FirstOrDefaultAsync(m => m.Id == id);

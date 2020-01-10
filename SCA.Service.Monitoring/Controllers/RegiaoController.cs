@@ -20,20 +20,20 @@ namespace SCA.Monitoring.Controllers
 
         public RegiaoController(RegiaoService service)
         {
-            _regiaoService = service;
+            this._regiaoService = service;
         }
 
         [HttpGet]
         public async Task<IEnumerable<Regiao>> Regiao()
         {
-            return await _regiaoService.FindAllAsync();
+            return await this._regiaoService.FindAllAsync();
         }
 
         [HttpGet]
         [Route("{id}")]
         public async Task<Regiao> Details(int? id)
         {
-            var regiao = await _regiaoService.FindByIdAsync(id);
+            var regiao = await this._regiaoService.FindByIdAsync(id);
             if (regiao == null)
             {
                 regiao = new Regiao();

@@ -28,6 +28,7 @@ namespace SCA.Service.Inputs.Services
         {
             return (id == null) ? null : await _context.Insumo.Include(i => i.Marca).Include(i => i.Tipo).FirstOrDefaultAsync(m => m.Id == id);
         }
+
         public async Task InsertAsync(Insumo insumo)
         {
             _context.Add(insumo);
