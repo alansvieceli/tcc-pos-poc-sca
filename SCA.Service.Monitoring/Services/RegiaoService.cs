@@ -38,6 +38,11 @@ namespace SCA.Service.Monitoring.Services
             return (id == null) ? null : await _context.Regiao.Include(i => i.Barragens).ThenInclude(b => b.Sensores).FirstOrDefaultAsync(m => m.Id == id);
         }
 
+        public async Task<Regiao>  CompleteFindByIdAsync(int? id)
+        {
+            return (id == null) ? null : await _context.Regiao.Include(i => i.Barragens).ThenInclude(b => b.Sensores).ThenInclude(s => s.Historico).FirstOrDefaultAsync(m => m.Id == id);
+        }
+
         public async Task InsertAsync(Regiao regiao)
         {
             _context.Add(regiao);

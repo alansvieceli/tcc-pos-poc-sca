@@ -29,6 +29,13 @@ namespace SCA.Service.Monitoring.Controllers
             return await this._regiaoService.SimpleFindAllAsync();
         }
 
+        [HttpGet]
+        [Route("regiao/completo/{id}")]
+        public async Task<Regiao> RegiaoDetail(int? id)
+        {
+            return await this._regiaoService.CompleteFindByIdAsync(id);
+        }
+
         [HttpPost]
         [Route("check")]
         public async Task<IActionResult> Create(SensorHistorico historico)
