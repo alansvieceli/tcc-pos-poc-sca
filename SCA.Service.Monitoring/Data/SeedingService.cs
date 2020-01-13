@@ -1,4 +1,5 @@
-﻿using SCA.Shared.Entities.Enums;
+﻿using SCA.Shared.Entities.Alert;
+using SCA.Shared.Entities.Enums;
 using SCA.Shared.Entities.Monitoring;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace SCA.Service.Monitoring.Data
         public void Seed()
         {
             //se tiver alguma coisa no banco, sai fora
-            if (_context.Regiao.Any() || _context.Barragem.Any() || _context.Sensor.Any() || _context.SensorHistorico.Any())
+            if (_context.Regiao.Any() )
             {
                 return; // banco já foi populado
             }
@@ -111,6 +112,18 @@ namespace SCA.Service.Monitoring.Data
             SensorHistorico sh46 = new SensorHistorico { Id = 46, Sensor = s30, Data = new DateTime(2019, 11, 13, 19, 10, 25), Status = SensorStatus.Verde };
             SensorHistorico sh47 = new SensorHistorico { Id = 47, Sensor = s30, Data = new DateTime(2019, 11, 13, 22, 09, 44), Status = SensorStatus.Verde };
 
+            Cadastro c1 = new Cadastro { Id = 1, Regiao = r1, Telefone = "(31) 9999-9999"};
+            Cadastro c2 = new Cadastro { Id = 1, Regiao = r1, Telefone = "(31) 9918-7788" };
+            Cadastro c3 = new Cadastro { Id = 1, Regiao = r1, Telefone = "(31) 8891-4332" };
+
+            Cadastro c4 = new Cadastro { Id = 1, Regiao = r2, Telefone = "(31) 9188-4433" };
+            Cadastro c5 = new Cadastro { Id = 1, Regiao = r2, Telefone = "(31) 9911-7712" };
+
+            Cadastro c6 = new Cadastro { Id = 1, Regiao = r3, Telefone = "(31) 9184-3322" };
+            Cadastro c7 = new Cadastro { Id = 1, Regiao = r3, Telefone = "(31) 9941-3321" };
+            Cadastro c8 = new Cadastro { Id = 1, Regiao = r3, Telefone = "(31) 9987-3348" };
+            Cadastro c9 = new Cadastro { Id = 1, Regiao = r3, Telefone = "(31) 9917-7726" };
+
             _context.Regiao.AddRange(r1, r2, r3);
 
             _context.Barragem.AddRange(b1, b2, b3, b4, b5, b6);
@@ -123,6 +136,8 @@ namespace SCA.Service.Monitoring.Data
                 sh1, sh2, sh3, sh4, sh5, sh6, sh7, sh8, sh9, sh10, sh11, sh12, sh13, sh14, sh15, sh16, sh17,
                 sh18, sh19, sh20, sh21, sh22, sh23, sh24, sh25, sh26, sh27, sh28, sh29, sh30, sh31, sh32, sh33,
                 sh34, sh35, sh36, sh37, sh38, sh39, sh40, sh41, sh42, sh43, sh44, sh45, sh46, sh47);
+
+            _context.Cadastro.AddRange(c1, c2, c3, c4, c5, c6, c7, c8, c9);
 
             _context.SaveChanges();
 

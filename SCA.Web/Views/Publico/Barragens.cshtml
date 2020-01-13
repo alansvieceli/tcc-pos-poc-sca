@@ -12,7 +12,8 @@
 <p>
     <div>
         <p>Receber Avisos via SMS das barragens de sua região</p>
-        <form asp-action="Cadastro" asp-controller="Publico" class="form-inline">
+        <form asp-action="Alerta" asp-controller="Publico" class="form-inline">
+            <input type="hidden" id="RegiaoId" name="RegiaoId" value="@ViewBag.RegiaoId">
             <div class="form-group mb-2">
                 <label>Telefone: </label>
             </div>

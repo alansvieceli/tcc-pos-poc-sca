@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SCA.Service.Monitoring.Services;
+using SCA.Shared.Entities.Alert;
 using SCA.Shared.Entities.Monitoring;
 using SCA.Shared.Results;
 
@@ -15,11 +16,13 @@ namespace SCA.Service.Monitoring.Controllers
     {
         private readonly SensorHistoricoService _sensorHistoricoService;
         private readonly RegiaoService _regiaoService;
+        private readonly CadastroService _cadastroService;
 
-        public PublicoController(SensorHistoricoService sensorHistoricoService, RegiaoService regiaoService)
+        public PublicoController(SensorHistoricoService sensorHistoricoService, RegiaoService regiaoService, CadastroService cadastroService)
         {
             this._sensorHistoricoService = sensorHistoricoService;
             this._regiaoService = regiaoService;
+            this._cadastroService = cadastroService;
         }
 
         [HttpGet]
@@ -58,5 +61,14 @@ namespace SCA.Service.Monitoring.Controllers
 
             return Ok(new ResultApi(false, "Não foi possivel inserir"));
         }
+
+        [HttpPost]
+        [Route("cadastro")]
+        public async Task<IActionResult> Cadastro(Cadastro cadastro)
+        {
+            await this._cadastroService.InsertAsync(cadastro);
+            return Ok(new ResultApi(true));
+        }
+
     }
 }

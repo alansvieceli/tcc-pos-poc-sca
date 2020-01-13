@@ -32,6 +32,7 @@ namespace SCA.Monitoring
             services.AddScoped<BarragemService>();
             services.AddScoped<SensorService>();
             services.AddScoped<SensorHistoricoService>();
+            services.AddScoped<CadastroService>();
 
             services.AddSwaggerDocumentation("SCA.Service.Monitoring");
         }

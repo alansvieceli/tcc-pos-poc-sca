@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SCA.Service.Monitoring.Data;
 
 namespace SCA.Service.Monitoring.Migrations
 {
     [DbContext(typeof(MonitoramentoContext))]
-    partial class MonitoramentoContextModelSnapshot : ModelSnapshot
+    [Migration("20200113131446_Alertas")]
+    partial class Alertas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -23,13 +25,14 @@ namespace SCA.Service.Monitoring.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("RegiaoId")
+                    b.Property<int>("RegiaId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("RegiaoId")
                         .HasColumnType("int");
 
                     b.Property<string>("Telefone")
-                        .IsRequired()
-                        .HasColumnType("varchar(20) CHARACTER SET utf8mb4")
-                        .HasMaxLength(20);
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("Id");
 
@@ -126,9 +129,7 @@ namespace SCA.Service.Monitoring.Migrations
                 {
                     b.HasOne("SCA.Shared.Entities.Monitoring.Regiao", "Regiao")
                         .WithMany("Alerts")
-                        .HasForeignKey("RegiaoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RegiaoId");
                 });
 
             modelBuilder.Entity("SCA.Shared.Entities.Monitoring.Barragem", b =>

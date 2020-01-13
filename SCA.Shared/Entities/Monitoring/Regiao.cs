@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using SCA.Shared.Entities.Alert;
 
 namespace SCA.Shared.Entities.Monitoring
 {
@@ -10,6 +11,7 @@ namespace SCA.Shared.Entities.Monitoring
         public string UF { get; set; }
         public string Cidade { get; set; }
         public ICollection<Barragem> Barragens { get; set; } = new List<Barragem>();
+        public ICollection<Cadastro> Alerts { get; set; } = new List<Cadastro>();
 
         public void AddBarragem(Barragem b)
         {
