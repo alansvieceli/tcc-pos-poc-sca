@@ -61,6 +61,21 @@ namespace SCA.Shared.Services
             return obj;
         }
 
+        public async Task<T> CompleteFindByIdAsync(int? id)
+        {
+            if (id == null)
+            {
+                return default(T);
+            }
+
+            var response = await _clientHttp.GetAsync(string.Concat(this._url, $"/completo/{id}"));
+            response.EnsureSuccessStatusCode();
+            string responseBody = await response.Content.ReadAsStringAsync();
+            T obj = JsonConvert.DeserializeObject<T>(responseBody);
+
+            return obj;
+        }
+
         public async Task<bool> InsertAsync(T obj)
         {
             string url = String.Concat(this._url);

@@ -1,0 +1,37 @@
+version: '3.4'
+
+services:
+
+  db:
+    container_name: mysql-db-01
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+      - 33060:33060
+    env_file:
+      - mysql.env
+    volumes:
+      # Volume dos dados 
+      - ./dados:/var/lib/mysql
+      
+  admin_db:
+    container_name: mysql-admin-01
+    image: nazarpc/phpmyadmin
+    links:
+      - db:mysql
+    ports:
+      - 8082:80
+    depends_on:
+      - db
+      
+  authentication:
+    image: authentication
+    build:
+      context: .
+      dockerfile: SCA.Service.Auth/Dockerfile
+    ports:
+      - "6001:80"
+    env_file:
+      - services.env
+    depends_on:
+      - admin_db 

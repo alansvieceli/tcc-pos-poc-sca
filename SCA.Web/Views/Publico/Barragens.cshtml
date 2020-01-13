@@ -1,0 +1,81 @@
+﻿@model SCA.Shared.Entities.Monitoring.Regiao
+@using SCA.Shared.Utils;
+
+@{
+    ViewData["Title"] = "Barragens";
+
+    var barragem = Model.Barragens.FirstOrDefault();
+}
+
+<h1>Barragens</h1>
+
+<p>
+    <div>
+        <p>Receber Avisos via SMS das barragens de sua região</p>
+        <form asp-action="Cadastro" asp-controller="Publico" class="form-inline">
+            <div class="form-group mb-2">
+                <label>Telefone: </label>
+            </div>
+            <div class="form-group mx-sm-3 mb-2">
+                <input type="tel" class="form-control" id="Telefone" name="Telefone" onkeypress="$(this).mask('(00) 0000-00009')">
+            </div>
+            <div class="form-group mb-2">
+                <input type="submit" value="Cadastrar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</p>
+
+<p>
+    <i class="fas fa-search" aria-hidden="true"></i>
+    <input class="form-control" id="buscar" type="text" placeholder="Pesquisar" aria-label="Pesquisar">
+
+    <div>
+        <h3><span class="badge badge-pill badge-secondary">@Model</span></h3>
+
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr class="bg-light">
+                    <th style="width: 30px">
+                        @Html.DisplayNameFor(model => barragem.Id)
+                    </th>
+                    <th style="width: 50%">
+                        @Html.DisplayNameFor(model => barragem.Descricao)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => barragem.DataCadastro)
+                    </th>
+                    <th style="width: 60px">Senrores</th>
+                    <th style="text-align: center">Status</th>
+                </tr>
+            </thead>
+            <tbody id="dados">
+                @foreach (var itemBarragem in Model.Barragens)
+                {
+                    var sh = itemBarragem.GetLastStatus();
+                    string style = Functions.GetStyleStatus(sh);
+                    int count = itemBarragem.Sensores.Count;
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => itemBarragem.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => itemBarragem.Descricao)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => itemBarragem.DataCadastro)
+                        </td>
+                        <td>
+                            @count
+                        </td>
+                        <td style="text-align: center">
+                            <div class="flag @style"></div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</p>
+
+@Html.Partial("_LegendaBarragens")

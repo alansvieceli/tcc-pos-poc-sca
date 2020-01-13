@@ -28,21 +28,21 @@
                             @if (rule.Contains("ADMIN") || rule.Contains("USER_COMMON"))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Insumos">Insumos</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Insumos" asp-action="Index">Insumos</a>
                                 </li>
                             }
 
                             @if (rule.Contains("ADMIN") || rule.Contains("MAINTENANCE"))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Mautencao">Manutenção</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Mautencao" asp-action="Index">Manutenção</a>
                                 </li>
                             }
 
                             @if (rule.Contains("ADMIN") || rule.Contains("MONITOR"))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Monitoramento">Monitoramento</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Monitoramento" asp-action="Index">Monitoramento</a>
                                 </li>
                             }
                         }
@@ -76,6 +76,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/jquery.mask.min.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

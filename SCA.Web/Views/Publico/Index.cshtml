@@ -1,0 +1,23 @@
+﻿@model IEnumerable<SCA.Shared.Entities.Monitoring.Regiao>
+
+@{
+    ViewData["Title"] = "Consulta Pública";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form asp-action="Barragens" asp-controller="Publico">
+    <div class="form-group">
+        <label for="RegiaoId">Região: </label>
+        <select class="form-control" id="RegiaoId" name="RegiaoId">
+            <option></option>
+            @foreach (var item in Model)
+            {
+                <option value="@item.Id">@item.UF - @item.Cidade</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Consultar" class="btn btn-primary" />
+    </div>
+</form>

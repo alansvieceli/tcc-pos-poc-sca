@@ -15,6 +15,8 @@ namespace SCA.Shared.Services
 
         Task<T> FindByIdAsync(int? id);
 
+        Task<T> CompleteFindByIdAsync(int? id);
+
         Task<bool> InsertAsync(T obj);        
 
         Task<bool> UpdateAsync(int? id, T obj);
