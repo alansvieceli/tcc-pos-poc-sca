@@ -28,7 +28,7 @@ namespace SCA.Service.Monitoring.Services
 
         public async Task<Sensor> FindByIdAsync(int? id)
         {
-            return (id == null) ? null : await _context.Sensor.Include(s => s.Historico).FirstOrDefaultAsync(s => s.Id == id);
+            return (id == null) ? null : await _context.Sensor.Include(s => s.Barragem).Include(s => s.Historico).FirstOrDefaultAsync(s => s.Id == id);
         }
 
         public async Task InsertAsync(Sensor sensor)
