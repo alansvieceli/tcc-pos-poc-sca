@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SCA.Service.Monitoring", "S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SCA.Service.Inputs", "SCA.Service.Inputs\SCA.Service.Inputs.csproj", "{B71C5997-C17C-4BE0-A42F-B2A53C87BF94}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCA.Service.Alert", "SCA.Service.Alert\SCA.Service.Alert.csproj", "{5DE9788C-A0E0-4D97-A11A-6FDFD6C3F8D7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{B71C5997-C17C-4BE0-A42F-B2A53C87BF94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B71C5997-C17C-4BE0-A42F-B2A53C87BF94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B71C5997-C17C-4BE0-A42F-B2A53C87BF94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DE9788C-A0E0-4D97-A11A-6FDFD6C3F8D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DE9788C-A0E0-4D97-A11A-6FDFD6C3F8D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DE9788C-A0E0-4D97-A11A-6FDFD6C3F8D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DE9788C-A0E0-4D97-A11A-6FDFD6C3F8D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

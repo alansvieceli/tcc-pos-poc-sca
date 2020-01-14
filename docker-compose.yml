@@ -72,6 +72,18 @@ services:
     depends_on:
       - admin_db
       
+  alert:
+    image: alert
+    build:
+      context: .
+      dockerfile: SCA.Service.Alert/Dockerfile
+    ports:
+      - "6005:80"
+    env_file:
+      - services.env
+    depends_on:
+      - admin_db
+      
   gateway:
     image: gateway
     build:
@@ -86,4 +98,5 @@ services:
       - inputs
       - maintenance
       - monitoring
+      - alert
       

@@ -98,6 +98,31 @@
       ],
       "UpstreamPathTemplate": "/monitoring/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete", "Options" ]
+    },
+	
+	{
+      "DownstreamPathTemplate": "/",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "alert",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/alert/",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete", "Options" ]
+    },
+    {
+      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "alert",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/alert/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete", "Options" ]
     }
   ],
   "GlobalConfiguration": {}
