@@ -14,6 +14,7 @@ namespace SCA.Shared.Entities.Monitoring
         public int RegiaoId { get; set; }
         [Display(Name = "Descrição")]
         public string Descricao { get; set; }
+        [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         [Display(Name = "Data de Cadastro")]
         public DateTime DataCadastro { get; set; }

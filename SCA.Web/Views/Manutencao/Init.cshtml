@@ -1,0 +1,30 @@
+﻿@model SCA.Shared.Entities.Maintenance.Manutencao
+
+@{
+    ViewData["Title"] = "Manutenção - Iniciar";
+}
+
+<h4>Iniciar Manutenção</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Init">
+            <div class="form-group">
+                <label asp-for="@Model.Id" class="control-label"></label>
+                <input asp-for="@Model.Id" class="form-control" readonly />
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Iniciar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Pendentes">Voltar para Lista</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

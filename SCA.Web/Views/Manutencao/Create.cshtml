@@ -1,0 +1,64 @@
+﻿@model SCA.Web.Models.ViewModels.ManutencaoViewModel
+
+@{
+    ViewData["Title"] = "Manutenção - Cadastrar";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h4>Cadastro</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Manutencao.Insumo" class="control-label"></label>
+                <select asp-for="Manutencao.InsumoId" asp-items="@(new SelectList(Model.Insumos,"Id", "Descricao"))" class="form-control">
+                    <option selected="selected" value=""></option>
+                </select>
+                <span asp-validation-for="Manutencao.InsumoId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Manutencao.DescricaoAgendamento" class="control-label"></label>
+                <input asp-for="Manutencao.DescricaoAgendamento" class="form-control" />
+                <span asp-validation-for="Manutencao.DescricaoAgendamento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Manutencao.DataAgendamento" class="control-label"></label>
+                <input asp-for="Manutencao.DataAgendamento" class="form-control" disabled />
+                <span asp-validation-for="Manutencao.DataAgendamento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Manutencao.PrevisaoManutencao" class="control-label"></label>
+                <input asp-for="Manutencao.PrevisaoManutencao" class="form-control" />
+                <span asp-validation-for="Manutencao.PrevisaoManutencao" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Manutencao.Tipo" class="control-label"></label>
+                <select asp-for="Manutencao.Tipo" asp-items="Html.GetEnumSelectList<SCA.Shared.Entities.Enums.ManutencaoTipo>()" class="form-control">
+                    <option selected="selected" value=""></option>
+                </select>
+                <span asp-validation-for="Manutencao.Tipo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Manutencao.Status" class="control-label"></label>
+                <select asp-for="Manutencao.Status" asp-items="Html.GetEnumSelectList<SCA.Shared.Entities.Enums.ManutencaoStatus>()" class="form-control" disabled>
+                    <option selected="selected" value=""></option>
+                </select>
+                <span asp-validation-for="Manutencao.Status" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <input type="submit" value="Inserir" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Pendentes">Voltar para Lista</a>
+</div>
+

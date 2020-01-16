@@ -1,0 +1,77 @@
+﻿@model SCA.Shared.Entities.Maintenance.Manutencao
+
+@{
+    ViewData["Title"] = "Manutenção - Detalhes";
+}
+
+    <h1>@ViewData["Title"]</h1>
+
+<div>
+    <h4>Detalhes</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-3">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class = "col-sm-9">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt class = "col-sm-3">
+            @Html.DisplayNameFor(model => model.InsumoId)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.InsumoId) - @Html.DisplayFor(model => model.Insumo.Descricao)
+        </dd>
+        <dt class = "col-sm-3">
+            @Html.DisplayNameFor(model => model.DescricaoAgendamento)
+        </dt>
+        <dd class = "col-sm-9">
+            @Html.DisplayFor(model => model.DescricaoAgendamento)
+        </dd>
+        <dt class = "col-sm-3">
+            @Html.DisplayNameFor(model => model.DataAgendamento)
+        </dt>
+        <dd class = "col-sm-9">
+            @Html.DisplayFor(model => model.DataAgendamento)
+        </dd>
+        <dt class = "col-sm-3">
+            @Html.DisplayNameFor(model => model.PrevisaoManutencao)
+        </dt>
+        <dd class = "col-sm-9">
+            @Html.DisplayFor(model => model.PrevisaoManutencao)
+        </dd>
+        <dt class = "col-sm-3">
+            @Html.DisplayNameFor(model => model.Tipo)
+        </dt>
+        <dd class = "col-sm-9">
+            @Html.DisplayFor(model => model.Tipo)
+        </dd>
+        <dt class = "col-sm-3">
+            @Html.DisplayNameFor(model => model.DataInicioManutencao)
+        </dt>
+        <dd class = "col-sm-9">
+            @Html.DisplayFor(model => model.DataInicioManutencao)
+        </dd>
+        <dt class = "col-sm-3">
+            @Html.DisplayNameFor(model => model.DataFimManutencao)
+        </dt>
+        <dd class = "col-sm-9">
+            @Html.DisplayFor(model => model.DataFimManutencao)
+        </dd>
+        <dt class = "col-sm-3">
+            @Html.DisplayNameFor(model => model.DescricaoManutencao)
+        </dt>
+        <dd class = "col-sm-9">
+            @Html.DisplayFor(model => model.DescricaoManutencao)
+        </dd>
+        <dt class = "col-sm-3">
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd class = "col-sm-9">
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Realizados">Voltar para Lista</a>
+</div>
