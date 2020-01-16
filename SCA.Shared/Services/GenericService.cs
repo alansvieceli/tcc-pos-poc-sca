@@ -35,10 +35,11 @@ namespace SCA.Shared.Services
             }
         }
 
-        public async Task<IEnumerable<T>> FindAllAsync()
-        {
-            
-            var response = await _clientHttp.GetAsync(this._url);
+        public async Task<IEnumerable<T>> FindAllAsync(string recurso = "")
+        {            
+            string url = String.IsNullOrEmpty(recurso) ? this._url : String.Concat(this._url, "/", recurso);
+ 
+            var response  = await _clientHttp.GetAsync(url);
             response.EnsureSuccessStatusCode();
             string responseBody = await response.Content.ReadAsStringAsync();
             IEnumerable<T> lista = JsonConvert.DeserializeObject<IEnumerable<T>>(responseBody);
@@ -46,14 +47,16 @@ namespace SCA.Shared.Services
             return lista;
         }
 
-        public async Task<T> FindByIdAsync(int? id)
+        public async Task<T> FindByIdAsync(int id, string recurso = "")
         {
-            if (id == null)
+            if (id == 0)
             {
                 return default(T);
             }
 
-            var response = await _clientHttp.GetAsync(string.Concat(this._url, $"/{id}"));
+            string url = String.IsNullOrEmpty(recurso) ? this._url : String.Concat(this._url, "/", recurso);
+
+            var response = await _clientHttp.GetAsync(string.Concat(url, $"/{id}"));
             response.EnsureSuccessStatusCode();
             string responseBody = await response.Content.ReadAsStringAsync();
             T obj = JsonConvert.DeserializeObject<T>(responseBody);
@@ -61,9 +64,9 @@ namespace SCA.Shared.Services
             return obj;
         }
 
-        public async Task<T> CompleteFindByIdAsync(int? id)
+        public async Task<T> CompleteFindByIdAsync(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return default(T);
             }
@@ -96,7 +99,7 @@ namespace SCA.Shared.Services
             return false;
         }
 
-        public async Task<bool> UpdateAsync(int? id, T obj)
+        public async Task<bool> UpdateAsync(int id, T obj)
         {
             string url = String.Concat(this._url);
             var jsonContent = JsonConvert.SerializeObject(obj);
@@ -116,9 +119,9 @@ namespace SCA.Shared.Services
             return false;
         }
 
-        public async Task<bool> DeleteAsync(int? id)
+        public async Task<bool> DeleteAsync(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return false;
             }

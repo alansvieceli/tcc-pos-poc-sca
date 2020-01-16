@@ -72,14 +72,12 @@ namespace SCA.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Insumo insumo)
         {
-
             if (ModelState.IsValid)
             {
                 await _insumosService.InsertAsync(insumo);
                 return RedirectToAction(nameof(Index));
             }
             return View(insumo);
-
         }
 
         public async Task<IActionResult> Details(int? id)
@@ -125,7 +123,7 @@ namespace SCA.Web.Controllers
             {
                 try
                 {
-                    await _insumosService.UpdateAsync(id, insumo);
+                    await _insumosService.UpdateAsync(id.Value, insumo);
                 }
                 catch (ApplicationException e)
                 {

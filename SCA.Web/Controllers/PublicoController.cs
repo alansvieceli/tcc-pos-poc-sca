@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using SCA.Shared.Dto;
 using SCA.Shared.Entities.Alert;
 using SCA.Shared.Entities.Monitoring;
 using SCA.Shared.Services;

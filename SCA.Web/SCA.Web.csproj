@@ -16,4 +16,8 @@
     <ProjectReference Include="..\SCA.Shared\SCA.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
+
 </Project>

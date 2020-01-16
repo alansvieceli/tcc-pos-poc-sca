@@ -14,7 +14,6 @@ namespace SCA.Service.Monitoring.Services
 {
     public class CadastroService
     {
-        private readonly IConfiguration _configuration;
         private readonly MonitoramentoContext _context;
         private readonly string host;
         private readonly int port;

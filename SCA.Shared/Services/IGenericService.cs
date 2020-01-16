@@ -11,16 +11,16 @@ namespace SCA.Shared.Services
 
         void SetToken(string token);
 
-        Task<IEnumerable<T>> FindAllAsync();
+        Task<IEnumerable<T>> FindAllAsync(string recurso = "");
 
-        Task<T> FindByIdAsync(int? id);
+        Task<T> FindByIdAsync(int id, string recurso = "");
 
-        Task<T> CompleteFindByIdAsync(int? id);
+        Task<T> CompleteFindByIdAsync(int id);
 
         Task<bool> InsertAsync(T obj);        
 
-        Task<bool> UpdateAsync(int? id, T obj);
+        Task<bool> UpdateAsync(int id, T obj);
 
-        Task<bool> DeleteAsync(int? id);
+        Task<bool> DeleteAsync(int id);
     }
 }

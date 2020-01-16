@@ -26,7 +26,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Manutencao.DataAgendamento" class="control-label"></label>
-                <input asp-for="Manutencao.DataAgendamento" class="form-control" disabled />
+                <input asp-for="Manutencao.DataAgendamento" class="form-control" readonly/>
                 <span asp-validation-for="Manutencao.DataAgendamento" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -44,12 +44,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="Manutencao.Status" class="control-label"></label>
-                <select asp-for="Manutencao.Status" asp-items="Html.GetEnumSelectList<SCA.Shared.Entities.Enums.ManutencaoStatus>()" class="form-control" disabled>
+                <select asp-for="Manutencao.Status" asp-items="Html.GetEnumSelectList<SCA.Shared.Entities.Enums.ManutencaoStatus>()" class="form-control" readonly>
                     <option selected="selected" value=""></option>
                 </select>
                 <span asp-validation-for="Manutencao.Status" class="text-danger"></span>
             </div>
-
 
             <div class="form-group">
                 <input type="submit" value="Inserir" class="btn btn-primary" />
@@ -61,4 +60,8 @@
 <div>
     <a asp-action="Pendentes">Voltar para Lista</a>
 </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
 

@@ -40,12 +40,10 @@
                                         Manutenção
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Manutencao" asp-action="Pendentes">Pendentes</a>
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Manutencao" asp-action="Realizados">Realizados</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Manutencoes" asp-action="Pendentes">Pendentes</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Manutencoes" asp-action="Realizados">Realizados</a>
                                     </div>
                                 </li>
-
-
                             }
 
                             @if (rule.Contains("ADMIN") || rule.Contains("MONITOR"))
