@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SCA.Service.Inputs.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class InitInputs : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

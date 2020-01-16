@@ -9,8 +9,8 @@ using SCA.Service.Monitoring.Data;
 namespace SCA.Service.Monitoring.Migrations
 {
     [DbContext(typeof(MonitoramentoContext))]
-    [Migration("20200113132009_AlertasCorrecao2")]
-    partial class AlertasCorrecao2
+    [Migration("20200116140301_InitInputs")]
+    partial class InitInputs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

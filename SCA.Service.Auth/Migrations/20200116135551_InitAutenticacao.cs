@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SCA.Service.Auth.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class InitAutenticacao : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

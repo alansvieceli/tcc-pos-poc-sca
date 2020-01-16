@@ -8,8 +8,8 @@ using SCA.Service.Inputs.Data;
 namespace SCA.Service.Auth.Migrations
 {
     [DbContext(typeof(AuthContext))]
-    [Migration("20200105021518_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20200116135551_InitAutenticacao")]
+    partial class InitAutenticacao
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

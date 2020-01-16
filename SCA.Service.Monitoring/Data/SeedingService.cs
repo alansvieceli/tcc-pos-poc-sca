@@ -113,16 +113,16 @@ namespace SCA.Service.Monitoring.Data
             SensorHistorico sh47 = new SensorHistorico { Id = 47, Sensor = s30, Data = new DateTime(2019, 11, 13, 22, 09, 44), Status = SensorStatus.Verde };
 
             Cadastro c1 = new Cadastro { Id = 1, Regiao = r1, Telefone = "(31) 9999-9999"};
-            Cadastro c2 = new Cadastro { Id = 1, Regiao = r1, Telefone = "(31) 9918-7788" };
-            Cadastro c3 = new Cadastro { Id = 1, Regiao = r1, Telefone = "(31) 8891-4332" };
+            Cadastro c2 = new Cadastro { Id = 2, Regiao = r1, Telefone = "(31) 9918-7788" };
+            Cadastro c3 = new Cadastro { Id = 3, Regiao = r1, Telefone = "(31) 8891-4332" };
 
-            Cadastro c4 = new Cadastro { Id = 1, Regiao = r2, Telefone = "(31) 9188-4433" };
-            Cadastro c5 = new Cadastro { Id = 1, Regiao = r2, Telefone = "(31) 9911-7712" };
+            Cadastro c4 = new Cadastro { Id = 4, Regiao = r2, Telefone = "(31) 9188-4433" };
+            Cadastro c5 = new Cadastro { Id = 5, Regiao = r2, Telefone = "(31) 9911-7712" };
 
-            Cadastro c6 = new Cadastro { Id = 1, Regiao = r3, Telefone = "(31) 9184-3322" };
-            Cadastro c7 = new Cadastro { Id = 1, Regiao = r3, Telefone = "(31) 9941-3321" };
-            Cadastro c8 = new Cadastro { Id = 1, Regiao = r3, Telefone = "(31) 9987-3348" };
-            Cadastro c9 = new Cadastro { Id = 1, Regiao = r3, Telefone = "(31) 9917-7726" };
+            Cadastro c6 = new Cadastro { Id = 6, Regiao = r3, Telefone = "(31) 9184-3322" };
+            Cadastro c7 = new Cadastro { Id = 7, Regiao = r3, Telefone = "(31) 9941-3321" };
+            Cadastro c8 = new Cadastro { Id = 8, Regiao = r3, Telefone = "(31) 9987-3348" };
+            Cadastro c9 = new Cadastro { Id = 9, Regiao = r3, Telefone = "(31) 9917-7726" };
 
             _context.Regiao.AddRange(r1, r2, r3);
 

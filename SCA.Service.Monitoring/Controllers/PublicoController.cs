@@ -58,9 +58,9 @@ namespace SCA.Service.Monitoring.Controllers
                     try
                     {
                         Sensor sensor = await this._sensorService.FindByIdAsync(historico.SensorId);
-                        this._cadastroService.EnviarAlertas(historico.Status, sensor.Barragem.RegiaoId);
+                        await this._cadastroService.EnviarAlertas(historico.Status, sensor.Barragem.RegiaoId);
                     }
-                    catch (Exception e)
+                    catch
                     {
                         //ignorar execeção
                     }

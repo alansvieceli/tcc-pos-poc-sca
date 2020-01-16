@@ -13,7 +13,7 @@ namespace SCA.Service.Inputs.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize(Role.ADMIN, Role.USER_COMMON)]
+    [Authorize(Role.ADMIN, Role.USER_COMMON, Role.MAINTENANCE)]
     public class InsumosController : Controller
     {
         private readonly InsumoService _insumoService;

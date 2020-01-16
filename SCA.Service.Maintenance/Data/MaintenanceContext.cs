@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using SCA.Shared.Entities.Inputs;
+using SCA.Shared.Entities.Maintenance;
 
 namespace SCA.Service.Maintenance.Data
 {
@@ -11,5 +9,10 @@ namespace SCA.Service.Maintenance.Data
         public MaintenanceContext(DbContextOptions<MaintenanceContext> options) : base(options)
         {
         }
+
+        public DbSet<Insumo> Insumo { get; set; }
+        public DbSet<Marca> Marca { get; set; }
+        public DbSet<Tipo> Tipo { get; set; }
+        public DbSet<Manutencao> Manutencao { get; set; }
     }
 }

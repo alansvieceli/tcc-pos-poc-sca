@@ -3,12 +3,12 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SCA.Service.Inputs.Data;
+using SCA.Service.Maintenance.Data;
 
-namespace SCA.Service.Inputs.Migrations
+namespace SCA.Service.Maintenance.Migrations
 {
-    [DbContext(typeof(InputsContext))]
-    partial class InputsContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(MaintenanceContext))]
+    partial class MaintenanceContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -76,6 +76,47 @@ namespace SCA.Service.Inputs.Migrations
                     b.ToTable("Tipo");
                 });
 
+            modelBuilder.Entity("SCA.Shared.Entities.Maintenance.Manutencao", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DataAgendamento")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime>("DataFimManutencao")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime>("DataInicioManutencao")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("DescricaoAgendamento")
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("DescricaoManutencao")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("InsumoId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("PrevisaoManutencao")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Tipo")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InsumoId");
+
+                    b.ToTable("Manutencao");
+                });
+
             modelBuilder.Entity("SCA.Shared.Entities.Inputs.Insumo", b =>
                 {
                     b.HasOne("SCA.Shared.Entities.Inputs.Marca", "Marca")
@@ -87,6 +128,15 @@ namespace SCA.Service.Inputs.Migrations
                     b.HasOne("SCA.Shared.Entities.Inputs.Tipo", "Tipo")
                         .WithMany("Insumos")
                         .HasForeignKey("TipoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("SCA.Shared.Entities.Maintenance.Manutencao", b =>
+                {
+                    b.HasOne("SCA.Shared.Entities.Inputs.Insumo", "Insumo")
+                        .WithMany()
+                        .HasForeignKey("InsumoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

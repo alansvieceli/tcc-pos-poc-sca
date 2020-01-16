@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SCA.Service.Monitoring.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class InitInputs : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -37,6 +37,26 @@ namespace SCA.Service.Monitoring.Migrations
                     table.PrimaryKey("PK_Barragem", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Barragem_Regiao_RegiaoId",
+                        column: x => x.RegiaoId,
+                        principalTable: "Regiao",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Cadastro",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    RegiaoId = table.Column<int>(nullable: false),
+                    Telefone = table.Column<string>(maxLength: 20, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cadastro", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Cadastro_Regiao_RegiaoId",
                         column: x => x.RegiaoId,
                         principalTable: "Regiao",
                         principalColumn: "Id",
@@ -91,6 +111,11 @@ namespace SCA.Service.Monitoring.Migrations
                 column: "RegiaoId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Cadastro_RegiaoId",
+                table: "Cadastro",
+                column: "RegiaoId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Sensor_BarragemId",
                 table: "Sensor",
                 column: "BarragemId");
@@ -103,6 +128,9 @@ namespace SCA.Service.Monitoring.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Cadastro");
+
             migrationBuilder.DropTable(
                 name: "SensorHistorico");
 
