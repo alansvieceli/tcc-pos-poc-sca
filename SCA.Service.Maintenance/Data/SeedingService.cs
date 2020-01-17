@@ -19,88 +19,82 @@ namespace SCA.Service.Maintenance.Data
 
         public void Seed()
         {
-            if (_context.Manutencao.Any() || _context.Tipo.Any() || _context.Marca.Any())
+            if (_context.Manutencao.Any())
             {
                 return; // banco já foi populado
             }
 
-            Marca mc1 = new Marca { Id = 1, Descricao = "Marca 1" };
-            Marca mc5 = new Marca { Id = 2, Descricao = "Marca 2" };
-
-            Tipo t1 = new Tipo { Id = 1, Descricao = "Caminhões Ariculados" };
-            Tipo t2 = new Tipo { Id = 2, Descricao = "Carregadeiras de Rodas Grandes" };
-            Tipo t4 = new Tipo { Id = 4, Descricao = "Empilhadeira" };
-
-            Insumo i1 = new Insumo { Id = 1, Descricao = "Insumo 1", Marca = mc5, Tipo = t1, Status = InsumosStatus.Ativo, DataCadastro = new DateTime(2019, 4, 10) };
-            Insumo i2 = new Insumo { Id = 2, Descricao = "Insumo 2", Marca = mc5, Tipo = t2, Status = InsumosStatus.Ativo, DataCadastro = new DateTime(2019, 7, 15) };
-            Insumo i3 = new Insumo { Id = 3, Descricao = "Insumo 3", Marca = mc1, Tipo = t4, Status = InsumosStatus.Ativo, DataCadastro = new DateTime(2019, 12, 19) };
-
             Manutencao m1 = new Manutencao {
                 Id = 1,
-                DataAgendamento = new DateTime(2020, 1, 10),
-                DescricaoAgendamento = "Teste 1",
+                DataAgendamento = DateTime.Now,
+                DescricaoAgendamento = "Preventiva (Insumo 1)",
                 InsumoId = 1,
+                InsumoDesc = "Insumo 1",
                 Tipo = ManutencaoTipo.PREVENTIVA,
                 Status = ManutencaoStatus.PENDENTE,
-                PrevisaoManutencao = new DateTime(2020, 1, 15)
+                PrevisaoManutencao = DateTime.Today.AddDays(182)
             };
 
             Manutencao m2 = new Manutencao {
                 Id = 2,
-                DataAgendamento = new DateTime(2020, 1, 10),
-                DescricaoAgendamento = "Teste 2",
-                InsumoId = 3,
-                Tipo = ManutencaoTipo.CORRETIVA,
+                DataAgendamento = DateTime.Now,
+                DescricaoAgendamento = "Preventiva (Insumo 2)",
+                InsumoId = 2,
+                InsumoDesc = "Insumo 2",
+                Tipo = ManutencaoTipo.PREVENTIVA,
                 Status = ManutencaoStatus.PENDENTE,
-                PrevisaoManutencao = new DateTime(2020, 1, 14)
+                PrevisaoManutencao = DateTime.Today.AddDays(91)
             };
 
             Manutencao m3 = new Manutencao {
                 Id = 3,
-                DataAgendamento = new DateTime(2019, 12, 10),
-                DescricaoAgendamento = "Teste 3",
+                DataAgendamento = DateTime.Now,
+                DescricaoAgendamento = "Preventiva (Insumo 3)",
                 InsumoId = 3,
+                InsumoDesc = "Insumo 3",
                 Tipo = ManutencaoTipo.PREVENTIVA,
-                Status = ManutencaoStatus.REALIZADA,
-                PrevisaoManutencao = new DateTime(2019, 12, 14),
-                DataInicioManutencao = new DateTime(2019, 12, 14, 10, 05, 23),
-                DescricaoManutencao = "Executar alguma coisa",
-                DataFimManutencao = new DateTime(2019, 12, 17, 10, 26, 44)
+                Status = ManutencaoStatus.PENDENTE,
+                PrevisaoManutencao = DateTime.Today.AddDays(182)
             };
 
             Manutencao m4 = new Manutencao {
                 Id = 4,
-                DataAgendamento = new DateTime(2020, 01, 01),
-                DescricaoAgendamento = "Teste 3",
-                InsumoId = 3,
-                Tipo = ManutencaoTipo.CORRETIVA,
-                Status = ManutencaoStatus.EXECUTANDO,
-                PrevisaoManutencao = new DateTime(2020, 01, 03),
-                DataInicioManutencao = new DateTime(2020, 12, 04, 07, 02, 44),
-                DescricaoManutencao = "Executar alguma coisa xx",
+                DataAgendamento = DateTime.Now,
+                DescricaoAgendamento = "Preventiva (Insumo 4)",
+                InsumoId = 4,
+                InsumoDesc = "Insumo 4",
+                Tipo = ManutencaoTipo.PREVENTIVA,
+                Status = ManutencaoStatus.PENDENTE,
+                PrevisaoManutencao = DateTime.Today.AddDays(365)
             };
-
 
             Manutencao m5 = new Manutencao {
                 Id = 5,
-                DataAgendamento = new DateTime(2020, 01, 01),
-                DescricaoAgendamento = "Teste 3",
-                InsumoId = 2,
+                DataAgendamento = DateTime.Now,
+                DescricaoAgendamento = "Corretiva (Insumo 3)",
+                InsumoId = 3,
+                InsumoDesc = "Insumo 3",
                 Tipo = ManutencaoTipo.CORRETIVA,
-                Status = ManutencaoStatus.REALIZADA,
-                PrevisaoManutencao = new DateTime(2020, 01, 02),
-                DataInicioManutencao = new DateTime(2020, 12, 02, 10, 27, 44),
-                DescricaoManutencao = "Executar alguma coisa yy",
-                DataFimManutencao = new DateTime(2019, 12, 17, 10, 12, 44)
+                Status = ManutencaoStatus.EXECUTANDO,
+                PrevisaoManutencao = DateTime.Today,
+                DataInicioManutencao = DateTime.Now.AddMinutes(17)
             };
 
-            _context.Tipo.AddRange(t1, t2, t4);
+            Manutencao m6 = new Manutencao {
+                Id = 6,
+                DataAgendamento = DateTime.Now,
+                DescricaoAgendamento = "Preventiva (Insumo 2)",
+                InsumoId = 2,
+                InsumoDesc = "Insumo 2",
+                Tipo = ManutencaoTipo.CORRETIVA,
+                Status = ManutencaoStatus.FINALIZADA,
+                PrevisaoManutencao = DateTime.Today,
+                DataInicioManutencao = DateTime.Now.AddMinutes(27),
+                DataFimManutencao = DateTime.Now.AddMinutes(48)
+            };
 
-            _context.Marca.AddRange(mc1, mc5);
 
-            _context.Insumo.AddRange(i1, i2, i3);
-
-            _context.Manutencao.AddRange(m1, m2, m3, m4, m5);
+            _context.Manutencao.AddRange(m1, m2, m3, m4, m5, m6);
 
             _context.SaveChanges();
         }

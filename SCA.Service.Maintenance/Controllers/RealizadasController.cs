@@ -25,7 +25,7 @@ namespace SCA.Service.Maintenance.Controllers
         [HttpGet]
         public async Task<IEnumerable<Manutencao>> Index()
         {
-            return await this._manutencaoService.FindByStatusAsync(ManutencaoStatus.REALIZADA);
+            return await this._manutencaoService.FindByStatusAsync(ManutencaoStatus.FINALIZADA);
         }
 
         [HttpGet]

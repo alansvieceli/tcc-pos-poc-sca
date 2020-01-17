@@ -39,10 +39,10 @@ namespace SCA.Service.Inputs.Data
             Tipo t6 = new Tipo { Id = 9, Descricao = "Retroescavadeiras" };
             Tipo t10 = new Tipo { Id = 10, Descricao = "Sensores de Capacidade" };
 
-            Insumo i1 = new Insumo { Id = 1, Descricao = "Insumo 1", Marca = m5, Tipo = t1, Status = InsumosStatus.Ativo, DataCadastro = new DateTime(2019, 4, 10) };
-            Insumo i2 = new Insumo { Id = 2, Descricao = "Insumo 2", Marca = m5, Tipo = t2, Status = InsumosStatus.Ativo, DataCadastro = new DateTime(2019, 7, 15) };
-            Insumo i3 = new Insumo { Id = 3, Descricao = "Insumo 3", Marca = m1, Tipo = t4, Status = InsumosStatus.Ativo, DataCadastro = new DateTime(2019, 12, 19) };
-            Insumo i4 = new Insumo { Id = 4, Descricao = "Insumo 4", Marca = m7, Tipo = t6, Status = InsumosStatus.Inativo, DataCadastro = new DateTime(2019, 9, 3) };
+            Insumo i1 = new Insumo { Id = 1, Descricao = "Insumo 1", Marca = m5, Tipo = t1, Status = InsumosStatus.Ativo, DataCadastro = DateTime.Today, ManutencaoPreventiva = InsumoManutencaoPreventiva.SEMESTRAL };
+            Insumo i2 = new Insumo { Id = 2, Descricao = "Insumo 2", Marca = m5, Tipo = t2, Status = InsumosStatus.Ativo, DataCadastro = DateTime.Today, ManutencaoPreventiva = InsumoManutencaoPreventiva.TRIMESTRAL };
+            Insumo i3 = new Insumo { Id = 3, Descricao = "Insumo 3", Marca = m1, Tipo = t4, Status = InsumosStatus.Ativo, DataCadastro = DateTime.Today, ManutencaoPreventiva = InsumoManutencaoPreventiva.SEMESTRAL };
+            Insumo i4 = new Insumo { Id = 4, Descricao = "Insumo 4", Marca = m7, Tipo = t6, Status = InsumosStatus.Inativo, DataCadastro = DateTime.Today, ManutencaoPreventiva = InsumoManutencaoPreventiva.ANUAL };
 
             _context.Tipo.AddRange(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10);
 

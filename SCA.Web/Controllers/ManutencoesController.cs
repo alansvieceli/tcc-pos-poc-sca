@@ -17,7 +17,7 @@ using SCA.Web.Models.ViewModels;
 
 namespace SCA.Web.Controllers
 {
-    [Authorize(TipoRetornoAcesso.WEB, Role.ADMIN, Role.MAINTENANCE)]
+    [Authorize(TipoRetornoAcesso.WEB, Role.ADMIN, Role.MAINTENANCE, Role.USER_COMMON)]
     [PegarTokenActionFilter]
     [RoleActionFilter]
     public class ManutencoesController : ScaController
@@ -52,7 +52,8 @@ namespace SCA.Web.Controllers
 
         public async Task<IActionResult> Pendentes()
         {
-            return View(await this._manutencaoService.FindAllAsync("pendentes"));
+            var lista = await this._manutencaoService.FindAllAsync("pendentes");
+            return View(lista.OrderByDescending(m => m.Status).ThenBy(m => m.PrevisaoManutencao));
         }
 
         public async Task<IActionResult> Create()
@@ -77,8 +78,10 @@ namespace SCA.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                await this._manutencaoService.InsertAsync(manutencao);
-                return RedirectToAction(nameof(Index));
+                var insumo = await this._insumoService.FindByIdAsync(manutencao.InsumoId);
+                manutencao.InsumoDesc = insumo.Descricao;
+                await this._manutencaoService.InsertAsync(manutencao, "pendentes");
+                return RedirectToAction(nameof(Pendentes));
             }
 
             var insumos = await this._insumoService.FindAllAsync();
@@ -87,12 +90,88 @@ namespace SCA.Web.Controllers
                 Insumos = insumos.Where(i => i.Status != InsumosStatus.Inativo)
             };
             return View(viewModel);
+        }
 
+        public async Task<IActionResult> Init(int? id)
+        {
+            Manutencao manutencao = await this._manutencaoService.FindByIdAsync(id.Value, "pendentes");
+
+            manutencao.DataInicioManutencao = DateTime.Now;
+            manutencao.Status = ManutencaoStatus.EXECUTANDO;
+
+            return View(manutencao);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Init(int? id, Manutencao manutencao)
+        {
+            if (id != manutencao.Id)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Id mismatch" });
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    await this._manutencaoService.UpdateAsync(id.Value, manutencao, "pendentes");
+                }
+                catch (ApplicationException e)
+                {
+                    return RedirectToAction(nameof(Error), new { message = e.Message });
+                }
+            }
+
+            return RedirectToAction(nameof(Pendentes));
+        }
+
+        public async Task<IActionResult> Edit(int? id)
+        {
+            Manutencao manutencao = await this._manutencaoService.FindByIdAsync(id.Value, "pendentes");
+            return View(manutencao);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int? id, Manutencao manutencao)
+        {
+            return RedirectToAction("Init", new { id, manutencao });
+        }
+
+        public async Task<IActionResult> Finalize(int? id)
+        {
+            Manutencao manutencao = await this._manutencaoService.FindByIdAsync(id.Value, "pendentes");
+            manutencao.DataFimManutencao = DateTime.Now;
+            manutencao.Status = ManutencaoStatus.FINALIZADA;
+            return View(manutencao);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Finalize(int? id, Manutencao manutencao)
+        {
+            IActionResult ac = RedirectToAction("Init", new { id, manutencao });
+
+            var insumo = await this._insumoService.FindByIdAsync(manutencao.InsumoId);
+
+            Manutencao m1 = new Manutencao {
+                DataAgendamento = DateTime.Now,
+                DescricaoAgendamento = $"Preventiva ({insumo.Descricao})",
+                InsumoId = insumo.Id,
+                InsumoDesc = insumo.Descricao,
+                Tipo = ManutencaoTipo.PREVENTIVA,
+                Status = ManutencaoStatus.PENDENTE,
+                PrevisaoManutencao = DateTime.Today.AddDays((int)insumo.ManutencaoPreventiva)
+            };
+
+            return ac;
         }
 
         public async Task<IActionResult> Realizados()
         {
-            return View(await this._manutencaoService.FindAllAsync("realizadas"));
+            var lista = await this._manutencaoService.FindAllAsync("realizadas");
+            return View(lista.OrderByDescending(m => m.DataFimManutencao).ThenBy(m => m.PrevisaoManutencao));
         }
 
         public async Task<IActionResult> Details(int? id)

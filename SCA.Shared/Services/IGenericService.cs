@@ -17,10 +17,10 @@ namespace SCA.Shared.Services
 
         Task<T> CompleteFindByIdAsync(int id);
 
-        Task<bool> InsertAsync(T obj);        
+        Task<int> InsertAsync(T obj, string recurso = "");        
 
-        Task<bool> UpdateAsync(int id, T obj);
+        Task<bool> UpdateAsync(int id, T obj, string recurso = "");
 
-        Task<bool> DeleteAsync(int id);
+        Task<bool> DeleteAsync(int id, string recurso = "");
     }
 }

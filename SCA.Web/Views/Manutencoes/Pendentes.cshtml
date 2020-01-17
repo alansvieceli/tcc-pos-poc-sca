@@ -19,7 +19,7 @@
                 @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Insumo.Descricao)
+                @Html.DisplayNameFor(model => model.InsumoId)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.DescricaoAgendamento)
@@ -45,7 +45,7 @@
                     @Html.DisplayFor(modelItem => item.Id)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Insumo.Descricao)
+                    @Html.DisplayFor(modelItem => item.InsumoDesc)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DescricaoAgendamento)
@@ -62,10 +62,13 @@
                 <td>
                     @if (item.Status == ManutencaoStatus.EXECUTANDO)
                     {
-                        @Html.ActionLink("Editar/Finalizar", "Edit", new {id = item.Id })
+                        @Html.ActionLink("Editar", "Edit", "Manutencoes", new { id = item.Id })
+                        @Html.Raw(" | ")
+                        @Html.ActionLink("Finalizar", "Finalize", "Manutencoes", new { id = item.Id });
 
-                    } else {
-                        @Html.ActionLink("Iniciar", "Init", new { id = item.Id })
+                    } else
+                    {
+                        @Html.ActionLink("Iniciar", "Init", "Manutencoes", new { id = item.Id })
                     }
                 </td>
             </tr>

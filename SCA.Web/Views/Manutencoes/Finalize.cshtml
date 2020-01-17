@@ -1,12 +1,12 @@
 ﻿@model SCA.Shared.Entities.Maintenance.Manutencao
 
 @{
-    ViewData["Title"] = "Manutenção - Cadastrar";
+    ViewData["Title"] = "Manutenção - Finalizar";
 }
 
 <h1>@ViewData["Title"]</h1>
 
-<h4>Cadastrar</h4>
+<h4>Finalizar</h4>
 <hr />
 <div class="row">
     <div class="col-md-6">
@@ -37,6 +37,11 @@
             </div>
 
             <div class="form-group">
+                <label asp-for="DataFimManutencao" class="control-label"></label>
+                <input asp-for="DataFimManutencao" class="form-control" readonly />
+            </div>
+
+            <div class="form-group">
                 <label asp-for="DescricaoManutencao" class="control-label"></label>
                 <textarea asp-for="DescricaoManutencao" class="form-control" rows="5"></textarea>
             </div>
@@ -55,7 +60,7 @@
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Iniciar" class="btn btn-primary" />
+                <input type="submit" value="Gravar" class="btn btn-primary" />
             </div>
         </form>
     </div>

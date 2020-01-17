@@ -79,9 +79,9 @@ namespace SCA.Shared.Services
             return obj;
         }
 
-        public async Task<bool> InsertAsync(T obj)
+        public async Task<int> InsertAsync(T obj, string recurso = "")
         {
-            string url = String.Concat(this._url);
+            string url = String.IsNullOrEmpty(recurso) ? this._url : String.Concat(this._url, "/", recurso);
             var jsonContent = JsonConvert.SerializeObject(obj);
             var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
             HttpResponseMessage response = await _clientHttp.PostAsync(url, content);
@@ -92,19 +92,19 @@ namespace SCA.Shared.Services
                 {
                     var responseContent = await response.Content.ReadAsStringAsync();
                     ResultApi resultApi = JsonConvert.DeserializeObject<ResultApi>(responseContent);
-                    return resultApi.status;
+                    return resultApi.Id;
                 }
             }
 
-            return false;
+            return 0;
         }
 
-        public async Task<bool> UpdateAsync(int id, T obj)
+        public async Task<bool> UpdateAsync(int id, T obj, string recurso = "")
         {
-            string url = String.Concat(this._url);
+            string url = String.IsNullOrEmpty(recurso) ? this._url : String.Concat(this._url, "/", recurso);
             var jsonContent = JsonConvert.SerializeObject(obj);
             var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await _clientHttp.PutAsync(string.Concat(this._url, $"/{id}"), content);
+            HttpResponseMessage response = await _clientHttp.PutAsync(string.Concat(url, $"/{id}"), content);
 
             if (response.IsSuccessStatusCode)
             {
@@ -119,14 +119,16 @@ namespace SCA.Shared.Services
             return false;
         }
 
-        public async Task<bool> DeleteAsync(int id)
+        public async Task<bool> DeleteAsync(int id, string recurso = "")
         {
             if (id == 0)
             {
                 return false;
             }
 
-            HttpResponseMessage response =  await _clientHttp.DeleteAsync(string.Concat(this._url, $"/{id}"));
+            string url = String.IsNullOrEmpty(recurso) ? this._url : String.Concat(this._url, "/", recurso);
+
+            HttpResponseMessage response =  await _clientHttp.DeleteAsync(string.Concat(url, $"/{id}"));
             
             if (response.IsSuccessStatusCode)
             {

@@ -14,6 +14,7 @@ using SCA.Shared.Exceptions;
 using SCA.Shared.Services;
 using SCA.Web.Controllers.Filters;
 using SCA.Web.Models.ViewModels;
+using SCA.Shared.Entities.Maintenance;
 
 namespace SCA.Web.Controllers
 {
@@ -26,13 +27,16 @@ namespace SCA.Web.Controllers
         private readonly IGenericService<Insumo> _insumosService;
         private readonly IGenericService<Marca> _marcaService;
         private readonly IGenericService<Tipo> _tipoService;
+        private readonly IGenericService<Manutencao> _manutencaoService;
 
-        public InsumosController(IConfiguration config, IGenericService<Insumo> insumosService, IGenericService<Marca> marcasService, IGenericService<Tipo> tiposService)
+        public InsumosController(IConfiguration config, IGenericService<Insumo> insumosService, 
+            IGenericService<Marca> marcasService, IGenericService<Tipo> tiposService, IGenericService<Manutencao> manutencaosService)
         {
             this._configuration = config;
             this._insumosService = insumosService;
             this._marcaService = marcasService;
             this._tipoService = tiposService;
+            this._manutencaoService = manutencaosService;
 
             Prepare();
         }
@@ -41,16 +45,18 @@ namespace SCA.Web.Controllers
         {
             string host = this._configuration.GetSection("ConfigApp").GetSection("host").Value;
             int port = ConfigurationBinder.GetValue<int>(this._configuration.GetSection("ConfigApp"), "port", 80);
-            _insumosService.SetUrl($"http://{host}:{port}/input/api/insumos");
-            _marcaService.SetUrl($"http://{host}:{port}/input/api/marcas");
-            _tipoService.SetUrl($"http://{host}:{port}/input/api/tipos");
+            this._insumosService.SetUrl($"http://{host}:{port}/input/api/insumos");
+            this._marcaService.SetUrl($"http://{host}:{port}/input/api/marcas");
+            this._tipoService.SetUrl($"http://{host}:{port}/input/api/tipos");
+            this._manutencaoService.SetUrl($"http://{host}:{port}/maintenance/api/pendentes");
         }
 
         public override void SetToken(string token)
         {
-            _insumosService.SetToken(token);
-            _marcaService.SetToken(token);
-            _tipoService.SetToken(token);
+            this._insumosService.SetToken(token);
+            this._marcaService.SetToken(token);
+            this._tipoService.SetToken(token);
+            this._manutencaoService.SetToken(token);
         }
 
         public async Task<IActionResult> Index()
@@ -74,7 +80,20 @@ namespace SCA.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _insumosService.InsertAsync(insumo);
+                insumo.Id = await this._insumosService.InsertAsync(insumo);
+
+                Manutencao m1 = new Manutencao {
+                    DataAgendamento = DateTime.Now,
+                    DescricaoAgendamento = $"Preventiva ({insumo.Descricao})",
+                    InsumoId = insumo.Id,
+                    InsumoDesc = insumo.Descricao,
+                    Tipo = ManutencaoTipo.PREVENTIVA,
+                    Status = ManutencaoStatus.PENDENTE,
+                    PrevisaoManutencao = DateTime.Today.AddDays((int) insumo.ManutencaoPreventiva)
+                };
+
+                await this._manutencaoService.InsertAsync(m1);
+
                 return RedirectToAction(nameof(Index));
             }
             return View(insumo);

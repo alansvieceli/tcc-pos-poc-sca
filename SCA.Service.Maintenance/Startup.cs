@@ -29,9 +29,6 @@ namespace SCA.Maintenance
 
             services.AddScoped<SeedingService>();
             services.AddScoped<ManutencaoService>();
-            services.AddScoped<InsumoService>();
-            services.AddScoped<MarcaService>();
-            services.AddScoped<TipoService>();
 
             services.AddSwaggerDocumentation("SCA.Service.Maintenance");
         }

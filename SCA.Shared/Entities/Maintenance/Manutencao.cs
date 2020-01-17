@@ -8,15 +8,15 @@ namespace SCA.Shared.Entities.Maintenance
     public class Manutencao
     {
         public int Id { get; set; }
-        
-        public Insumo Insumo { get; set; }
 
         [Display(Name = "Insumo")]
-        [Required(ErrorMessage = "{0} deve ser informada")]
+        [Required(ErrorMessage = "{0} deve ser informado")]
         public int InsumoId { get; set; }
 
+        public string InsumoDesc { get; set; }
+
         [Display(Name = "Descrição Agendamento")]
-        [Required(ErrorMessage = "{0} deve ser informada")]
+        [Required(ErrorMessage = "{0} deve ser informado")]
         public string DescricaoAgendamento { get; set; }
 
         [Display(Name = "Dt.Agendamento")]
@@ -28,11 +28,11 @@ namespace SCA.Shared.Entities.Maintenance
         [Display(Name = "Previsão Manutenção")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
-        [Required(ErrorMessage = "{0} deve ser informada")]
+        [Required(ErrorMessage = "{0} deve ser informado")]
         public DateTime PrevisaoManutencao { get; set; }
 
         [Display(Name = "Tipo de  Manutenção")]
-        [Required(ErrorMessage = "{0} deve ser informada")]
+        [Required(ErrorMessage = "{0} deve ser informado")]
         public ManutencaoTipo Tipo { get; set; }
 
         [Display(Name = "Início Manutenção")]

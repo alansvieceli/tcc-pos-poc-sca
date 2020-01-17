@@ -39,6 +39,13 @@
                 <span asp-validation-for="Insumo.Descricao" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Insumo.ManutencaoPreventiva" class="control-label"></label>
+                <select asp-for="Insumo.ManutencaoPreventiva" asp-items="Html.GetEnumSelectList<SCA.Shared.Entities.Enums.InsumoManutencaoPreventiva>()" class="form-control">
+                    <option selected="selected" value=""></option>
+                </select>
+                <span asp-validation-for="Insumo.ManutencaoPreventiva" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Insumo.DataCadastro" class="control-label"></label>
                 <input asp-for="Insumo.DataCadastro" class="form-control" readonly />
                 <span asp-validation-for="Insumo.DataCadastro" class="text-danger"></span>

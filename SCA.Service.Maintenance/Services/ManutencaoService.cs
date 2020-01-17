@@ -16,27 +16,27 @@ namespace SCA.Service.Maintenance.Services
 
         public ManutencaoService(MaintenanceContext context)
         {
-            _context = context;
+            this._context = context;
         }
 
         public async Task<IEnumerable<Manutencao>> FindAllAsync()
         {
-            return await _context.Manutencao.Include(m => m.Insumo).OrderByDescending(m => m.Status).ToListAsync();
+            return await _context.Manutencao.OrderByDescending(m => m.Status).ToListAsync();
         }
 
         public async Task<IEnumerable<Manutencao>> FindByStatusAsync(params ManutencaoStatus[] status)
         {
-            return await _context.Manutencao.Where(m => status.Contains(m.Status)).Include(m => m.Insumo).OrderByDescending(m => m.Status).ToListAsync();
+            return await _context.Manutencao.Where(m => status.Contains(m.Status)).OrderByDescending(m => m.Status).ToListAsync();
         }
 
         public async Task<Manutencao> FindByIdAsync(int? id)
         {
-            return (id == null) ? null : await _context.Manutencao.Include(m => m.Insumo).FirstOrDefaultAsync(m => m.Id == id);
+            return (id == null) ? null : await _context.Manutencao.FirstOrDefaultAsync(m => m.Id == id);
         }
 
         public async Task InsertAsync(Manutencao manutencao)
         {
-            _context.Add(manutencao);
+            _context.Manutencao.Add(manutencao);
             await _context.SaveChangesAsync();
         }
 

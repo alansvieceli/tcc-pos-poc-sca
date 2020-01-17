@@ -48,8 +48,8 @@ namespace SCA.Service.Inputs.Controllers
             {
                 try
                 {
-                    await this._insumoService.InsertAsync(insumo);
-                    return Ok(new ResultApi(true));
+                    insumo.Id = await this._insumoService.InsertAsync(insumo);
+                    return Ok(new ResultApi(true, insumo.Id));
                 }
                 catch (ApplicationException e)
                 {

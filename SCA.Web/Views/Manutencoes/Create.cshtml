@@ -13,7 +13,7 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Manutencao.Insumo" class="control-label"></label>
+                <label asp-for="Manutencao.InsumoId" class="control-label"></label>
                 <select asp-for="Manutencao.InsumoId" asp-items="@(new SelectList(Model.Insumos,"Id", "Descricao"))" class="form-control">
                     <option selected="selected" value=""></option>
                 </select>
@@ -44,7 +44,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Manutencao.Status" class="control-label"></label>
-                <select asp-for="Manutencao.Status" asp-items="Html.GetEnumSelectList<SCA.Shared.Entities.Enums.ManutencaoStatus>()" class="form-control" readonly>
+                <select asp-for="Manutencao.Status" asp-items="Html.GetEnumSelectList<SCA.Shared.Entities.Enums.ManutencaoStatus>()" class="form-control" readonly="readonly" tabindex="-1" aria-disabled="true">
                     <option selected="selected" value=""></option>
                 </select>
                 <span asp-validation-for="Manutencao.Status" class="text-danger"></span>

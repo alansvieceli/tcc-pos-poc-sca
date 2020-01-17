@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using SCA.Shared.Entities.Enums;
+using SCA.Shared.Entities.Maintenance;
 
 namespace SCA.Shared.Entities.Inputs
 {
@@ -24,5 +26,8 @@ namespace SCA.Shared.Entities.Inputs
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         [Required(ErrorMessage = "{0} deve ser informada")]
         public DateTime DataCadastro { get; set; }
+        [Display(Name = "Manutenção Preventiva")]
+        [Required(ErrorMessage = "{0} deve ser informada")]
+        public InsumoManutencaoPreventiva ManutencaoPreventiva { get; set; }
     }
 }

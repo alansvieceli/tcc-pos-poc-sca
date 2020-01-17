@@ -5,6 +5,6 @@ namespace SCA.Shared.Entities.Enums
     {
         PENDENTE = 0,
         EXECUTANDO = 1,
-        REALIZADA = 2
+        FINALIZADA = 2
     }
 }
