@@ -157,7 +157,7 @@ namespace SCA.Web.Controllers
 
             Manutencao m1 = new Manutencao {
                 DataAgendamento = DateTime.Now,
-                DescricaoAgendamento = $"Preventiva ({insumo.Descricao})",
+                DescricaoAgendamento = $"(F) Preventiva ({insumo.Descricao})",
                 InsumoId = insumo.Id,
                 InsumoDesc = insumo.Descricao,
                 Tipo = ManutencaoTipo.PREVENTIVA,
