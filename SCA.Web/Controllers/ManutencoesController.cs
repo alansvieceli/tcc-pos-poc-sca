@@ -59,7 +59,7 @@ namespace SCA.Web.Controllers
         public async Task<IActionResult> Create()
         {
             var insumos = await this._insumoService.FindAllAsync();
-            
+
             var viewModel = new ManutencaoViewModel {
                 Manutencao = new Manutencao {
                     DataAgendamento = DateTime.Now,
@@ -116,6 +116,14 @@ namespace SCA.Web.Controllers
                 try
                 {
                     await this._manutencaoService.UpdateAsync(id.Value, manutencao, "pendentes");
+
+                    var insumo = await this._insumoService.FindByIdAsync(manutencao.InsumoId);
+                    if (insumo.Status != InsumosStatus.Manutencao)
+                    {
+                        insumo.Status = InsumosStatus.Manutencao;
+                        await this._insumoService.UpdateAsync(insumo.Id, insumo);
+                    }
+
                 }
                 catch (ApplicationException e)
                 {
@@ -134,9 +142,27 @@ namespace SCA.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int? id, Manutencao manutencao)
+        public async Task<IActionResult> Edit(int? id, Manutencao manutencao)
         {
-            return RedirectToAction("Init", new { id, manutencao });
+            if (id != manutencao.Id)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Id mismatch" });
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    await this._manutencaoService.UpdateAsync(id.Value, manutencao, "pendentes");
+
+                }
+                catch (ApplicationException e)
+                {
+                    return RedirectToAction(nameof(Error), new { message = e.Message });
+                }
+            }
+
+            return RedirectToAction(nameof(Pendentes));
         }
 
         public async Task<IActionResult> Finalize(int? id)
@@ -151,21 +177,46 @@ namespace SCA.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Finalize(int? id, Manutencao manutencao)
         {
-            IActionResult ac = RedirectToAction("Init", new { id, manutencao });
+            if (id != manutencao.Id)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Id mismatch" });
+            }
 
-            var insumo = await this._insumoService.FindByIdAsync(manutencao.InsumoId);
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    await this._manutencaoService.UpdateAsync(id.Value, manutencao, "pendentes");
 
-            Manutencao m1 = new Manutencao {
-                DataAgendamento = DateTime.Now,
-                DescricaoAgendamento = $"(F) Preventiva ({insumo.Descricao})",
-                InsumoId = insumo.Id,
-                InsumoDesc = insumo.Descricao,
-                Tipo = ManutencaoTipo.PREVENTIVA,
-                Status = ManutencaoStatus.PENDENTE,
-                PrevisaoManutencao = DateTime.Today.AddDays((int)insumo.ManutencaoPreventiva)
-            };
+                    var insumo = await this._insumoService.FindByIdAsync(manutencao.InsumoId);
 
-            return ac;
+                    Manutencao m1 = new Manutencao {
+                        DataAgendamento = DateTime.Now,
+                        DescricaoAgendamento = $"(F) Preventiva ({insumo.Descricao})",
+                        InsumoId = insumo.Id,
+                        InsumoDesc = insumo.Descricao,
+                        Tipo = ManutencaoTipo.PREVENTIVA,
+                        Status = ManutencaoStatus.PENDENTE,
+                        PrevisaoManutencao = DateTime.Today.AddDays((int)insumo.ManutencaoPreventiva)
+                    };
+
+                    await this._manutencaoService.InsertAsync(m1, "pendentes");
+
+                    if (insumo.Status != InsumosStatus.Ativo)
+                    {
+                        insumo.Status = InsumosStatus.Ativo;
+                        await this._insumoService.UpdateAsync(insumo.Id, insumo);
+                    }
+
+                }
+                catch (ApplicationException e)
+                {
+                    return RedirectToAction(nameof(Error), new { message = e.Message });
+                }
+            }
+
+            return RedirectToAction(nameof(Pendentes));
+
         }
 
         public async Task<IActionResult> Realizados()
