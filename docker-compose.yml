@@ -84,6 +84,18 @@ services:
     depends_on:
       - admin_db
       
+  web:
+    image: web
+    build:
+      context: .
+      dockerfile: SCA.Web/Dockerfile
+    ports:
+      - "81:80"
+    env_file:
+      - services.env
+    depends_on:
+      - alert
+      
   gateway:
     image: gateway
     build:
@@ -99,4 +111,5 @@ services:
       - maintenance
       - monitoring
       - alert
+      - web
       

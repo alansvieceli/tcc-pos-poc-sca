@@ -41,9 +41,10 @@ namespace SCA.Service.Auth
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
-                seedingService.Seed();
+                app.UseDeveloperExceptionPage();               
             }
+
+            seedingService.Seed();
 
             app.UseSwagger();
 

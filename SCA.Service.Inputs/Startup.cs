@@ -41,8 +41,9 @@ namespace SCA.Service.Inputs
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                seedingService.Seed();
             }
+
+            seedingService.Seed();
 
             app.UseSwagger();
 

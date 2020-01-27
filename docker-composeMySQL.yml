@@ -23,15 +23,4 @@ services:
       - 8082:80
     depends_on:
       - db
-      
-  authentication:
-    image: authentication
-    build:
-      context: .
-      dockerfile: SCA.Service.Auth/Dockerfile
-    ports:
-      - "6001:80"
-    env_file:
-      - services.env
-    depends_on:
-      - admin_db 
+   
