@@ -14,6 +14,8 @@ namespace SCA.Shared.Extensions
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = title, Version = "v1.0" });
 
+            
+
 
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme {
                     Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
@@ -49,13 +51,14 @@ namespace SCA.Shared.Extensions
 
         }
 
-        public static IApplicationBuilder UseSwaggerDocumentation(this IApplicationBuilder app, string title)
+        public static IApplicationBuilder UseSwaggerDocumentation(this IApplicationBuilder app, string title, string routePrefix, string prefixUrl)
         {
             app.UseSwagger();
             app.UseSwaggerUI(c => {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", title);
-
-                c.DocumentTitle = "Title Documentation";
+                //"/swagger/v1/swagger.json"
+                c.SwaggerEndpoint($"{prefixUrl}/swagger/v1/swagger.json", title);
+                c.RoutePrefix = routePrefix;
+                c.DocumentTitle = "Documentação";
                 c.DocExpansion(DocExpansion.None);
             });
 

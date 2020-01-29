@@ -123,31 +123,6 @@
       ],
       "UpstreamPathTemplate": "/alert/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete", "Options" ]
-    },
-	
-	{
-      "DownstreamPathTemplate": "/",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "web",
-          "Port": 80
-        }
-      ],
-      "UpstreamPathTemplate": "/web/",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete", "Options" ]
-    },
-    {
-      "DownstreamPathTemplate": "/{everything}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "web",
-          "Port": 80
-        }
-      ],
-      "UpstreamPathTemplate": "/web/{everything}",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete", "Options" ]
     }
   ],
   "GlobalConfiguration": {}
