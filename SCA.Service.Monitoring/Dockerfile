@@ -1,4 +1,5 @@
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.0-buster-slim AS base
+ENV TZ=America/Sao_Paulo
 WORKDIR /app
 EXPOSE 80
 
