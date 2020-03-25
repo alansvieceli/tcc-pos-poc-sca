@@ -1,5 +1,5 @@
 # Sistema de Controle Ambiental (SCA)
-POC para o TCC da Pós em Arquitetura de Sistemas Distribuidos / Puc Minas
+POC para o TCC da Pós em Arquitetura de Sistemas Distribuidos / PUC Minas
 
 ![alt text](https://raw.githubusercontent.com/alansvieceli/tcc-pos-poc-sca/master/diagrama.png)
 
@@ -13,11 +13,15 @@ $ cd \SCA.Service.Auth && dotnet ef database update && cd ..\SCA.Service.Inputs 
 $ cd .. && docker-compose down
 ```
 
-## Inicia Sistema
+## Iniciar Sistema
 
 ```
 $ docker-compose up -d --build
 ```
+
+# Acessar sistema
+
+- http://localhost:81/
 
 # Links Úteis
 
@@ -31,9 +35,3 @@ $ docker-compose up -d --build
 - http://localhost:7000/alert/swagger (módulo de alerta, envio de mensagens)
 
 Obs: add autencicação "Bearer <token>"
-
-
-# Acessar sistema
-
-- http://localhost:81/
-
