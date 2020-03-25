@@ -1,4 +1,4 @@
-# Sistema de Controle Ambiental (SCA)
+# Sistema de Gestão Ambiental (SGA)
 POC para o TCC da Pós em Arquitetura de Sistemas Distribuidos / PUC Minas
 
 ![alt text](https://raw.githubusercontent.com/alansvieceli/tcc-pos-poc-sca/master/diagrama.png)
