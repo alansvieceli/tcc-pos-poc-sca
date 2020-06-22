@@ -6,11 +6,11 @@ POC para o TCC da Pós em Arquitetura de Sistemas Distribuidos / PUC Minas
 ## Preparar Banco de dados (dentro da pasta do projeto)
 
 ```
-$ docker-compose -f docker-composeMySQL.yxml up -d
+$ docker-compose -f docker-composeMySQL.yml up -d
 
 $ cd \SCA.Service.Auth && dotnet ef database update && cd ..\SCA.Service.Inputs && dotnet ef database update && cd ..\SCA.Service.Maintenance && dotnet ef database update && cd ..\SCA.Service.Monitoring && dotnet ef database update
 
-$ cd .. && docker-compose down
+$ cd .. && docker-compose -f docker-composeMySQL.yml down
 ```
 
 ## Iniciar Sistema
